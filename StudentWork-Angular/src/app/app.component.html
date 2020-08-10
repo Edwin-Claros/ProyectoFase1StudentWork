@@ -1,0 +1,13 @@
+<span>Welcome</span>
+
+<div *ngIf="logIn == true; else logOut" >
+    <router-outlet></router-outlet>
+</div>
+
+<ng-template #logOut>
+    <div>
+        <app-login></app-login>
+    </div>
+</ng-template>
+
+ 
