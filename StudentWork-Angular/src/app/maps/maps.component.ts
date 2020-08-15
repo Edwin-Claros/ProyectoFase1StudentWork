@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ConexionDBService } from '../conexion-db.service';
 
 declare const google: any;
 
@@ -15,9 +16,11 @@ draggable?: boolean;
 })
 export class MapsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _service:ConexionDBService) { }
 
   ngOnInit() {
+
+    this._service.SignIngIfUserExist();
 
     var myLatlng = new google.maps.LatLng(40.748817, -73.985428);
     var mapOptions = {

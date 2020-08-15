@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "now-ui-dashboard-angular": {
+    "StudentWork-Angular": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -18,7 +18,8 @@
             "polyfills": "src/polyfills.ts",
             "assets": [
               "src/assets",
-              "src/favicon.ico"
+              "src/favicon.ico",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
@@ -46,25 +47,27 @@
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
                 }
-              ]
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "now-ui-dashboard-angular:build"
+            "browserTarget": "StudentWork-Angular:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "now-ui-dashboard-angular:build:production"
+              "browserTarget": "StudentWork-Angular:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "now-ui-dashboard-angular:build"
+            "browserTarget": "StudentWork-Angular:build"
           }
         },
         "test": {
@@ -85,7 +88,8 @@
             ],
             "assets": [
               "src/assets",
-              "src/favicon.ico"
+              "src/favicon.ico",
+              "src/manifest.webmanifest"
             ]
           }
         },
@@ -101,7 +105,7 @@
         }
       }
     },
-    "now-ui-dashboard-angular-e2e": {
+    "StudentWork-Angular-e2e": {
       "root": "e2e",
       "sourceRoot": "e2e",
       "projectType": "application",
@@ -110,7 +114,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "now-ui-dashboard-angular:serve"
+            "devServerTarget": "StudentWork-Angular:serve"
           }
         },
         "lint": {
@@ -125,7 +129,7 @@
       }
     }
   },
-  "defaultProject": "now-ui-dashboard-angular",
+  "defaultProject": "StudentWork-Angular",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",

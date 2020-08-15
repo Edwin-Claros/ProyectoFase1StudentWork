@@ -14,7 +14,8 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
-import { LoginComponent } from '../../login/login.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../../../../src/environments/environment';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { LoginComponent } from '../../login/login.component';
     ReactiveFormsModule,
     ChartsModule,
     NgbModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   declarations: [
     DashboardComponent,
@@ -35,7 +37,6 @@ import { LoginComponent } from '../../login/login.component';
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
-    //LoginComponent,
   ]
 })
 

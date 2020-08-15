@@ -15,12 +15,13 @@ export class ConexionDBService {
   }
 
   obtenerUsuarioLogin(usuarioCorreo: string){
-    return this.http.get(`https://localhost:44306/api/Usuario/${usuarioCorreo}`)
+    return this.http.get(`https://webapistudentwork.azurewebsites.net/api/Usuario/${usuarioCorreo}`)
   }
 
   SignIngIfUserExist(){
-    if (localStorage.getItem('user')) {
-      this.router.navigate(['dashboard']);
+    if (localStorage.getItem('user')) {/*
+      this.router.navigate(['dashboard']); */
+      this.router.navigate;
       return true;
     } else {
       this.router.navigate(['login'])

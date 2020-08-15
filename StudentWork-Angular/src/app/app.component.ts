@@ -17,5 +17,4 @@ export class AppComponent implements OnInit{
   }
 
   logIn = this._service.SignIngIfUserExist();
-    
 }

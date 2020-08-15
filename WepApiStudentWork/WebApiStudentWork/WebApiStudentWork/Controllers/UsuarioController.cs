@@ -10,8 +10,8 @@ using WebApiStudentWork.Models;
 
 namespace WebApiStudentWork.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class UsuarioController : ControllerBase
     {
         private readonly StudentWorkContext _context;

@@ -1,5 +1,5 @@
 {
-  "name": "now-ui-dashboard-angular",
+  "name": "StudentWork-Angular",
   "version": "1.2.0",
   "license": "MIT",
   "scripts": {
@@ -24,6 +24,7 @@
     "@angular/platform-browser-dynamic": "9.0.6",
     "@angular/platform-server": "9.0.6",
     "@angular/router": "9.0.6",
+    "@angular/service-worker": "9.0.6",
     "@ng-bootstrap/ng-bootstrap": "6.0.0",
     "ajv": "6.12.0",
     "ajv-keywords": "3.4.1",

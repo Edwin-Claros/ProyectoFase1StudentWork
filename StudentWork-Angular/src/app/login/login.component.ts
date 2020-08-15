@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { ConexionDBService } from '../conexion-db.service';
 import { Router } from '@angular/router';
 import { UsuarioModels } from '../models/UsuarioModels';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,7 @@ export class LoginComponent implements OnInit {
     private _service:ConexionDBService,
     private formularioB:FormBuilder,
     private router: Router,
+    private toastr: ToastrService
   ) {
 
     this.FormularioGuardar = this.formularioB.group({
@@ -49,11 +51,23 @@ export class LoginComponent implements OnInit {
       }
       else {
         console.log("No Existe Usuario");
-        //this.growlService.addError({heading:'Oops',message:'Usuario No Existe'});
+        this.toastr.error('<span class="now-ui-icons ui-1_bell-53"></span> El <b> Usuario </b> No Existe.', '', {
+          timeOut: 8000,
+          enableHtml: true,
+          closeButton: true,
+          toastClass: "alert alert-danger alert-with-icon",
+          positionClass: 'toast-bottom-right',
+        });
       }
     }, error => {
       console.log("Usuario Y Contraseña Erroneas");
-      //this.growlService.addError({heading:'Oops',message:'Usuario Y Contraseña Erroneas'});
+      this.toastr.error('<span class="now-ui-icons ui-1_bell-53"></span> El <b> Usuario o Contraseña </b> Erronea.', '', {
+        timeOut: 8000,
+        enableHtml: true,
+        closeButton: true,
+        toastClass: "alert alert-danger alert-with-icon",
+        positionClass: 'toast-bottom-right',
+      });
       this.clear();
     });
   }
@@ -61,10 +75,6 @@ export class LoginComponent implements OnInit {
   clear() {
     console.log("clear clicked")
     this.FormularioGuardar.reset();
-  }
-
-  logoutUser() {
-    localStorage.removeItem('user');
   }
 
 }
