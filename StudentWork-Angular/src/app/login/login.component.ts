@@ -15,7 +15,6 @@ export class LoginComponent implements OnInit {
   FormularioGuardar:FormGroup;
   public usuarioContraseña: "";
   public usuarioCorreo: "";
-  obtner = {};
 
   constructor(
     private _service:ConexionDBService,

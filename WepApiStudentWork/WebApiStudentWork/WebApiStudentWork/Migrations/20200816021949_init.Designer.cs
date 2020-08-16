@@ -10,7 +10,7 @@ using WebApiStudentWork.DataContext;
 namespace WebApiStudentWork.Migrations
 {
     [DbContext(typeof(StudentWorkContext))]
-    [Migration("20200816005142_init")]
+    [Migration("20200816021949_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -200,12 +200,14 @@ namespace WebApiStudentWork.Migrations
                     b.HasOne("WebApiStudentWork.Models.PaisCiudad", "PaisCiudad")
                         .WithMany("Usuarios")
                         .HasForeignKey("paisCiudad_Id")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("WebApiStudentWork.Models.PaisDepartamento", "PaisDepartamento")
                         .WithMany("Usuarios")
                         .HasForeignKey("paisDepartamento_Id")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("WebApiStudentWork.Models.Pais", "Pais")
                         .WithMany("Usuarios")

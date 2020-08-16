@@ -198,12 +198,14 @@ namespace WebApiStudentWork.Migrations
                     b.HasOne("WebApiStudentWork.Models.PaisCiudad", "PaisCiudad")
                         .WithMany("Usuarios")
                         .HasForeignKey("paisCiudad_Id")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("WebApiStudentWork.Models.PaisDepartamento", "PaisDepartamento")
                         .WithMany("Usuarios")
                         .HasForeignKey("paisDepartamento_Id")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("WebApiStudentWork.Models.Pais", "Pais")
                         .WithMany("Usuarios")

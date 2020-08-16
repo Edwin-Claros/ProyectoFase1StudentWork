@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class ConexionDBService {
 
-  obtenerUsuario:Observable<any>
+  obtenerDatosUsuarioLocal: any;
 
   constructor(private http:HttpClient, private router: Router) {
 
@@ -16,6 +16,11 @@ export class ConexionDBService {
 
   obtenerUsuarioLogin(usuarioCorreo: string){
     return this.http.get(`https://webapistudentwork.azurewebsites.net/api/Usuario/${usuarioCorreo}`)
+  }
+
+  obtenerDatosLogin() {
+    this.obtenerDatosUsuarioLocal = JSON.parse(localStorage.getItem('user'));
+    return this.http.get(`https://webapistudentwork.azurewebsites.net/api/Usuario/${this.obtenerDatosUsuarioLocal.usuarioCorreo}`);
   }
 
   SignIngIfUserExist(){
@@ -28,5 +33,7 @@ export class ConexionDBService {
       return false;
     }
   }
+
+
 
 }

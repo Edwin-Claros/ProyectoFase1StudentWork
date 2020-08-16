@@ -61,10 +61,10 @@ namespace WebApiStudentWork.Models
             builder.Property(e => e.usuarioGenero).HasColumnType("char(1)");
             builder.Property(e => e.usuarioFechaNacimiento).HasColumnType("date");
 
-            builder.HasOne(e => e.Pais).WithMany(e => e.Usuarios).HasForeignKey(e => e.pais_Id).OnDelete(DeleteBehavior.Cascade);
-            builder.HasOne(e => e.PaisDepartamento).WithMany(e => e.Usuarios).HasForeignKey(e => e.paisDepartamento_Id).OnDelete(DeleteBehavior.Cascade).IsRequired(false);
-            builder.HasOne(e => e.PaisCiudad).WithMany(e => e.Usuarios).HasForeignKey(e => e.paisCiudad_Id).OnDelete(DeleteBehavior.Cascade).IsRequired(false);
-            builder.HasOne(e => e.LicenciaConducir).WithMany(e => e.Usuarios).HasForeignKey(e => e.licenciaConducir_Id).OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(e => e.Pais).WithMany(e => e.Usuarios).HasForeignKey(e => e.pais_Id).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(e => e.PaisDepartamento).WithMany(e => e.Usuarios).HasForeignKey(e => e.paisDepartamento_Id).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(e => e.PaisCiudad).WithMany(e => e.Usuarios).HasForeignKey(e => e.paisCiudad_Id).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(e => e.LicenciaConducir).WithMany(e => e.Usuarios).HasForeignKey(e => e.licenciaConducir_Id).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
 
         }
     }

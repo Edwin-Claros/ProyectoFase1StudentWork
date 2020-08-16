@@ -16,6 +16,7 @@ export class NavbarComponent implements OnInit {
       mobile_menu_visible: any = 0;
     private toggleButton: any;
     private sidebarVisible: boolean;
+    obtenerNombreUsuario: any;
 
     public isCollapsed = true;
 
@@ -37,6 +38,7 @@ export class NavbarComponent implements OnInit {
          }
      });
      this._service.SignIngIfUserExist();
+     this.obtenerNombreUsuario = JSON.parse(localStorage.getItem('user'));
     }
 
     collapse(){
@@ -152,7 +154,8 @@ export class NavbarComponent implements OnInit {
               return this.listTitles[item].title;
           }
       }
-      return 'Edwin Claros';
+
+      return this.obtenerNombreUsuario.usuarioNombre;
     }
 
     logoutUser() {
