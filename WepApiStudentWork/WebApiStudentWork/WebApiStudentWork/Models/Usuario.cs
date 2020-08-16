@@ -14,8 +14,31 @@ namespace WebApiStudentWork.Models
         public string usuarioNombre { get; set; }
         public string usuarioCorreo { get; set; }
         public string usuarioContraseña { get; set; }
+        public string usuarioDNI { get; set; }
+        public string usuarioTelefono { get; set; }
+        public string usuarioSkype { get; set; }
+        public string usuarioDireccion { get; set; }
+        public string usuarioCodigoPostal { get; set; }
+        public char usuarioEstadoCivil { get; set; }
+        public char usuarioVehiculoPropio { get; set; }
+        public char usuarioGenero { get; set; }
+        public DateTime usuarioFechaNacimiento { get; set; }
         [Timestamp]
         public byte[] usuarioTimestamp { get; set; }
+
+
+
+        public int pais_Id { get; set; }
+        public int paisDepartamento_Id { get; set; }
+        public int paisCiudad_Id { get; set; }
+        public int licenciaConducir_Id { get; set; }
+
+
+        public Pais Pais { get; set; }
+        public PaisDepartamento PaisDepartamento { get; set; }
+        public PaisCiudad PaisCiudad { get; set; }
+        public LicenciaConducir LicenciaConducir { get; set; }
+
     }
 
     public class UsuarioMap : IEntityTypeConfiguration<Usuario>
@@ -28,6 +51,20 @@ namespace WebApiStudentWork.Models
             builder.Property(e => e.usuarioNombre).HasColumnType("nvarchar(150)").IsRequired();
             builder.Property(e => e.usuarioCorreo).HasColumnType("nvarchar(150)").IsRequired();
             builder.Property(e => e.usuarioContraseña).HasColumnType("nvarchar(150)").IsRequired();
+            builder.Property(e => e.usuarioDNI).HasColumnType("nvarchar(150)");
+            builder.Property(e => e.usuarioTelefono).HasColumnType("nvarchar(150)");
+            builder.Property(e => e.usuarioSkype).HasColumnType("nvarchar(150)");
+            builder.Property(e => e.usuarioDireccion).HasColumnType("nvarchar(150)");
+            builder.Property(e => e.usuarioCodigoPostal).HasColumnType("nvarchar(150)");
+            builder.Property(e => e.usuarioEstadoCivil).HasColumnType("char(1)");
+            builder.Property(e => e.usuarioVehiculoPropio).HasColumnType("char(1)");
+            builder.Property(e => e.usuarioGenero).HasColumnType("char(1)");
+            builder.Property(e => e.usuarioFechaNacimiento).HasColumnType("date");
+
+            builder.HasOne(e => e.Pais).WithMany(e => e.Usuarios).HasForeignKey(e => e.pais_Id).OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(e => e.PaisDepartamento).WithMany(e => e.Usuarios).HasForeignKey(e => e.paisDepartamento_Id).OnDelete(DeleteBehavior.Cascade).IsRequired(false);
+            builder.HasOne(e => e.PaisCiudad).WithMany(e => e.Usuarios).HasForeignKey(e => e.paisCiudad_Id).OnDelete(DeleteBehavior.Cascade).IsRequired(false);
+            builder.HasOne(e => e.LicenciaConducir).WithMany(e => e.Usuarios).HasForeignKey(e => e.licenciaConducir_Id).OnDelete(DeleteBehavior.Cascade);
 
         }
     }

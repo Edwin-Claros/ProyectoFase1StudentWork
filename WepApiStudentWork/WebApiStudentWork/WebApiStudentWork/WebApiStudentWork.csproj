@@ -7,15 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200808230650_Initial.cs" />
-    <Compile Remove="Migrations\20200808230650_Initial.Designer.cs" />
-    <Compile Remove="Migrations\20200808232725_Initial.cs" />
-    <Compile Remove="Migrations\20200808232725_Initial.Designer.cs" />
-    <Compile Remove="Migrations\20200808235320_AgregandoContraseñaUsuario.cs" />
-    <Compile Remove="Migrations\20200808235320_AgregandoContraseñaUsuario.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.7">
