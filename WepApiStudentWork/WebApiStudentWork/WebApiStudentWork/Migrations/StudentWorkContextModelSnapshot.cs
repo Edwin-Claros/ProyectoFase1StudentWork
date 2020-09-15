@@ -100,10 +100,10 @@ namespace WebApiStudentWork.Migrations
                     b.Property<int>("licenciaConducir_Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("paisCiudad_Id")
+                    b.Property<int?>("paisCiudad_Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("paisDepartamento_Id")
+                    b.Property<int?>("paisDepartamento_Id")
                         .HasColumnType("int");
 
                     b.Property<int>("pais_Id")
@@ -123,6 +123,9 @@ namespace WebApiStudentWork.Migrations
                     b.Property<string>("usuarioDNI")
                         .HasColumnType("nvarchar(150)");
 
+                    b.Property<string>("usuarioDescripcion")
+                        .HasColumnType("nvarchar(300)");
+
                     b.Property<string>("usuarioDireccion")
                         .HasColumnType("nvarchar(150)");
 
@@ -130,12 +133,18 @@ namespace WebApiStudentWork.Migrations
                         .IsRequired()
                         .HasColumnType("char(1)");
 
+                    b.Property<string>("usuarioFacebook")
+                        .HasColumnType("nvarchar(150)");
+
                     b.Property<DateTime>("usuarioFechaNacimiento")
                         .HasColumnType("date");
 
                     b.Property<string>("usuarioGenero")
                         .IsRequired()
                         .HasColumnType("char(1)");
+
+                    b.Property<string>("usuarioInstagram")
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("usuarioNombre")
                         .IsRequired()
@@ -151,6 +160,9 @@ namespace WebApiStudentWork.Migrations
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp(6)");
+
+                    b.Property<string>("usuarioTwitter")
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("usuarioVehiculoPropio")
                         .IsRequired()
@@ -198,14 +210,12 @@ namespace WebApiStudentWork.Migrations
                     b.HasOne("WebApiStudentWork.Models.PaisCiudad", "PaisCiudad")
                         .WithMany("Usuarios")
                         .HasForeignKey("paisCiudad_Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("WebApiStudentWork.Models.PaisDepartamento", "PaisDepartamento")
                         .WithMany("Usuarios")
                         .HasForeignKey("paisDepartamento_Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("WebApiStudentWork.Models.Pais", "Pais")
                         .WithMany("Usuarios")

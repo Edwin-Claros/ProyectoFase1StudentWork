@@ -8,11 +8,11 @@ import { ConexionDBService } from '../../conexion-db.service';
 })
 export class FooterComponent implements OnInit {
   Date : Date = new Date();
-  
+
   constructor(private _service:ConexionDBService,) { }
 
   ngOnInit() {
-    this._service.SignIngIfUserExist();
+   // this._service.SignIngIfUserExist();
   }
 
 }

@@ -1,5 +1,4 @@
-<div class="panel-header panel-header-sm">
-</div>
+<div class="panel-header panel-header-sm"></div>
 <div class="main-content">
   <div class="row">
     <div class="col-md-8">
@@ -12,71 +11,288 @@
             <div class="row">
               <div class="col-md-5 pr-1">
                 <div class="form-group">
-                  <label>Company</label>
-                  <input type="text" class="form-control" placeholder="Company" value="">
+                  <label>Nombres</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Nombres"
+                    value=""
+                    [(ngModel)]="getDatoUser.usuarioNombre"
+                    name="_nombre"
+                  />
                 </div>
               </div>
-              <div class="col-md-3 px-1">
+              <div class="col-md-5 pr-1">
                 <div class="form-group">
-                  <label>Username</label>
-                  <input type="text" class="form-control" placeholder="Username" value="">
+                  <label>Apellidos</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Apellidos"
+                    value=""
+                  />
                 </div>
               </div>
-              <div class="col-md-4 pl-1">
+              <div class="col-md-5 pr-1">
                 <div class="form-group">
-                  <label for="email">Email address</label>
-                  <input name="email" id="email" type="email" class="form-control" placeholder="Email">
+                  <label>Identidad</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Identidad"
+                    value=""
+                    [(ngModel)]="getDatoUser.usuarioDNI"
+                    name="_dni"
+                  />
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6 pr-1">
+              <div class="col-md-5 pr-1">
                 <div class="form-group">
-                  <label>First Name</label>
-                  <input type="text" class="form-control" placeholder="Company" value="">
+                  <label>Fecha de Nacimiento</label>
+                  <input
+                    type="datetime-local"
+                    class="form-control"
+                    value=""
+                    [(ngModel)]="getDatoUser.usuarioFechaNacimiento"
+                    name="_fechanacimiento"
+                  />
                 </div>
               </div>
-              <div class="col-md-6 pl-1">
+              <div class="col-md-5 pr-1">
                 <div class="form-group">
-                  <label>Last Name</label>
-                  <input type="text" class="form-control" placeholder="Last Name" value="">
+                  <label>Telefono</label>
+                  <input
+                    type="tel"
+                    placeholder="Telefono"
+                    class="form-control"
+                    value=""
+                    [(ngModel)]="getDatoUser.usuarioTelefono"
+                    name="_telefono"
+                  />
                 </div>
+              </div>
+              <div class="col-md-5 pr-1">
+                <div class="form-group">
+                  <label>Skype</label>
+                  <input
+                    type="text"
+                    placeholder="Skype"
+                    class="form-control"
+                    value=""
+                    [(ngModel)]="getDatoUser.usuarioSkype"
+                    name="_skype"
+                  />
+                </div>
+              </div>
+              <div class="col-md-5 pr-1">
+                <div class="form-group">
+                  <label>Pais</label>
+                  <select
+                    placeholder="Pais"
+                    class="form-control"
+                    [(ngModel)]="getDatoUser.pais_Id"
+                    name="_pais"
+                  >
+                    <option
+                      *ngFor="let indexCountry of getCountryUser"
+                      value="{{ indexCountry.paisId }}"
+                    >
+                      {{ indexCountry.paisNombre }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-5 pr-1">
+                <div class="form-group">
+                  <label>Departamento</label>
+                  <select
+                    class="form-control"
+                    [(ngModel)]="getDatoUser.paisDepartamento_Id"
+                    name="_departamento"
+                  >
+                    <option
+                      *ngFor="let indexState of getStateUser"
+                      value="{{ indexState.paisDepartamentoId }}"
+                    >
+                      {{ indexState.paisDepartamentoNombre }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-5 pr-1">
+                <div class="form-group">
+                  <label>Ciudad</label>
+                  <select
+                    class="form-control"
+                    [(ngModel)]="getDatoUser.paisCiudad_Id"
+                    name="_ciudad"
+                  >
+                    <option
+                      *ngFor="let indexCity of getCityUser"
+                      value="{{ indexCity.paisCiudadId }}"
+                    >
+                      {{ indexCity.paisCiudadNombre }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-5 pr-1">
+                <div class="form-group">
+                  <label>Codigo Postal</label>
+                  <input
+                    type="text"
+                    placeholder="Codigo Postal"
+                    class="form-control"
+                    value=""
+                    [(ngModel)]="getDatoUser.usuarioCodigoPostal"
+                    name="_postal"
+                  />
+                </div>
+              </div>
+              <div class="col-md-5 pr-1">
+                <div class="form-group">
+                  <label>Direccion</label>
+                  <input
+                    type="text"
+                    placeholder="Direccion"
+                    class="form-control"
+                    value=""
+                    [(ngModel)]="getDatoUser.usuarioDireccion"
+                    name="_direccion"
+                  />
+                </div>
+              </div>
+              <div class="col-md-5 pr-1">
+                <div class="form-group">
+                  <label>Licencia de conducir</label>
+                  <select
+                    class="form-control"
+                    [(ngModel)]="getDatoUser.licenciaConducir_Id"
+                    name="_licencia"
+                  >
+                    <option
+                      *ngFor="let indexLicence of getLicencesUser"
+                      value="{{ indexLicence.licenciaConducirId }}"
+                    >
+                      {{ indexLicence.licenciaConducirNombre }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-5 pr-1">
+                <div class="form-group">
+                  <label>Genero</label>
+                </div>
+                <input
+                  type="radio"
+                  class="radio-inline"
+                  name="_genero"
+                  value="H"
+                  [(ngModel)]="getDatoUser.usuarioGenero"
+                />&nbsp;<label> Hombre </label>
+                &nbsp;
+                <input
+                  type="radio"
+                  class="radio-inline"
+                  name="_genero"
+                  value="M"
+                  [(ngModel)]="getDatoUser.usuarioGenero"
+                />&nbsp;<label> Mujer </label>
+              </div>
+              <div class="col-md-5 pr-1">
+                <div class="form-group">
+                  <label>Estado Civil</label>
+                </div>
+                <input
+                  type="radio"
+                  class="radio-inline"
+                  name="_civil"
+                  value="C"
+                  [(ngModel)]="getDatoUser.usuarioEstadoCivil"
+                />&nbsp;<label> Casado(a) </label>
+                &nbsp;
+                <input
+                  type="radio"
+                  class="radio-inline"
+                  name="_civil"
+                  value="S"
+                  [(ngModel)]="getDatoUser.usuarioEstadoCivil"
+                />&nbsp;<label> Soltero(a) </label>
+              </div>
+              <div class="col-md-5 pr-1">
+                <div class="form-group">
+                  <label>Dispone de vehículo propio?</label>
+                </div>
+                <input
+                  type="radio"
+                  class="radio"
+                  name="_vehiculo"
+                  value="S"
+                  [(ngModel)]="getDatoUser.usuarioVehiculoPropio"
+                />&nbsp;<label> Si </label>
+                &nbsp;
+                <input
+                  type="radio"
+                  class="radio"
+                  name="_vehiculo"
+                  value="N"
+                  [(ngModel)]="getDatoUser.usuarioVehiculoPropio"
+                />&nbsp;<label> No </label>
               </div>
             </div>
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <label>Address</label>
-                  <input type="text" class="form-control" placeholder="Home Address" value="">
+                  <label>Mas Sobre Mi</label>
+                  <textarea
+                    rows="4"
+                    cols="80"
+                    class="form-control"
+                    placeholder="Escribe aqui tu descripcion"
+                    value=""
+                  >
+                  {{ getDatoUser.usuarioDescripcion }}
+                  </textarea>
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-4 pr-1">
-                <div class="form-group">
-                  <label>City</label>
-                  <input type="text" class="form-control" placeholder="City" value="">
-                </div>
-              </div>
-              <div class="col-md-4 px-1">
-                <div class="form-group">
-                  <label>Country</label>
-                  <input type="text" class="form-control" placeholder="Country" value="">
-                </div>
-              </div>
-              <div class="col-md-4 pl-1">
-                <div class="form-group">
-                  <label>Postal Code</label>
-                  <input type="number" class="form-control" placeholder="">
-                </div>
+            <div class="col-md-5 pr-1">
+              <div class="form-group">
+                <label>Cuenta de Instagram</label>
+                <input
+                  type="text"
+                  placeholder="Cuenta de Instagram"
+                  class="form-control"
+                  value=""
+                  [(ngModel)]="getDatoUser.usuarioInstagram"
+                  name="_instagram"
+                />
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label>About Me</label>
-                  <textarea rows="4" cols="80" class="form-control" placeholder="Here can be your description" value="">Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</textarea>
-                </div>
+            <div class="col-md-5 pr-1">
+              <div class="form-group">
+                <label>Cuenta de Facebook</label>
+                <input
+                  type="text"
+                  placeholder="Cuenta de Facebook"
+                  class="form-control"
+                  value="}"
+                  [(ngModel)]="getDatoUser.usuarioFacebook"
+                  name="_facebook"
+                />
+              </div>
+            </div>
+            <div class="col-md-5 pr-1">
+              <div class="form-group">
+                <label>Cuenta de Twitter</label>
+                <input
+                  type="text"
+                  placeholder="Cuenta de Twitter"
+                  class="form-control"
+                  value=""
+                  [(ngModel)]="getDatoUser.usuarioTwitter"
+                  name="_twitter"
+                />
               </div>
             </div>
           </form>
@@ -86,35 +302,44 @@
     <div class="col-md-4">
       <div class="card card-user">
         <div class="image">
-          <img src="../assets/img/bg5.jpg" alt="...">
+          <img src="../assets/img/bg5.jpg" alt="..." />
         </div>
         <div class="card-body">
           <div class="author">
             <a href="#">
-              <img class="avatar border-gray" src="../assets/img/mike.jpg" alt="...">
-              <h5 class="title">Mike Andrew</h5>
+              <img
+                class="avatar border-gray"
+                src="../assets/img/mike.jpg"
+                alt="..."
+              />
+              <h5 class="title">{{ getDatoUser.usuarioNombre }}</h5>
             </a>
-            <p class="description">
-              michael24
+            <p class="description text-center">
+              {{ getDatoUser.usuarioDescripcion }}
             </p>
           </div>
-          <p class="description text-center">
-            "Lamborghini Mercy
-            <br> Your chick she so thirsty
-            <br> I'm in that two seat Lambo"
-          </p>
-        </div>
-        <hr>
-        <div class="button-container">
-          <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-            <i class="fab fa-facebook-f"></i>
-          </button>
-          <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-            <i class="fab fa-twitter"></i>
-          </button>
-          <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-            <i class="fab fa-google-plus-g"></i>
-          </button>
+          <hr />
+          <div class="button-container">
+            <button
+              href="getDatoUser.usuarioFacebook"
+              class="btn btn-neutral btn-icon btn-round btn-lg"
+              (click)="goFacebook()"
+            >
+              <i class="fab fa-facebook-f"></i>
+            </button>
+            <button
+              href="getDatoUser.usuarioTwitter"
+              class="btn btn-neutral btn-icon btn-round btn-lg"
+            >
+              <i class="fab fa-twitter"></i>
+            </button>
+            <button
+              href=""
+              class="btn btn-neutral btn-icon btn-round btn-lg"
+            >
+              <i class="fab fa-google-plus-g"></i>
+            </button>
+          </div>
         </div>
       </div>
     </div>

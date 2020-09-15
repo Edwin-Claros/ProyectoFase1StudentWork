@@ -34,7 +34,7 @@
             type="text"
             name=""
             class="form-control input_user"
-            placeholder="  Correo"
+            placeholder="Correo"
             formControlName="Correo"
           />
         </div>
@@ -46,7 +46,7 @@
             type="password"
             name=""
             class="form-control input_pass"
-            placeholder="  Contraseña"
+            placeholder="Contraseña"
             formControlName="Contraseña"
           />
         </div>
@@ -57,9 +57,33 @@
         type="button"
         name="button"
         class="btn login_btn"
-        (click)="obtenerDatosUsuarioLogin()"
+        (click)="loginFormulario()"
       >
         Login
+      </button>
+    </div>
+
+    <div class="ls_or">
+      <div class="ls_line"></div>
+      <span class="or_txt">
+        Sesión con Otros
+      </span>
+    </div>
+
+    <div class="d-flex justify-content-center mt-3 login_container">
+      <button
+        href="#"
+        class="btn btn-neutral btn-icon btn-round btn-lg"
+        (click)="loginFacebook()"
+      >
+        <i class="fab fa-facebook-f"></i>
+      </button>
+      <button
+        href="#"
+        class="btn btn-neutral btn-icon btn-round btn-lg"
+        (click)="loginGoogle()"
+      >
+        <i class="fab fa-google-plus-g"></i>
       </button>
     </div>
   </div>

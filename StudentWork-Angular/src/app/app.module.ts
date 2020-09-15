@@ -16,7 +16,19 @@ import { ConexionDBService } from './conexion-db.service';
 import { LoginComponent } from './login/login.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
+var config = {
+  production: false,
+  apiKey: "AIzaSyBkD_6_nW5KKuD94reo2HLeF7pNFEThA-0",
+  authDomain: "studentworkhn.firebaseapp.com",
+  databaseURL: "https://studentworkhn.firebaseio.com",
+  projectId: "studentworkhn",
+  storageBucket: "studentworkhn.appspot.com",
+  messagingSenderId: "996150531955",
+  appId: "1:996150531955:web:48fb8c519e9145a8e01706"
+};
 
 
 @NgModule({
@@ -31,6 +43,8 @@ import { environment } from '../environments/environment';
     NgbModule,
     ToastrModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    AngularFireModule.initializeApp(config),
+    AngularFireAuthModule
   ],
   declarations: [
     AppComponent,

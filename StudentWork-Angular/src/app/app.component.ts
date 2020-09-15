@@ -13,8 +13,7 @@ export class AppComponent implements OnInit{
   constructor(private _service:ConexionDBService) { }
 
   ngOnInit() {
-    this._service.SignIngIfUserExist();
   }
 
-  logIn = this._service.SignIngIfUserExist();
+  logIn = this._service.isLoggedIn;
 }

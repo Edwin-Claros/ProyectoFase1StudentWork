@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ConexionDBService } from '../conexion-db.service';
 import { Router } from '@angular/router';
-import { UsuarioModels } from '../models/UsuarioModels';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -34,10 +33,22 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._service.SignIngIfUserExist();
+    //this._service.SignIngIfUserExist();
   }
 
-  obtenerDatosUsuarioLogin() {
+  loginFormulario(){
+    this._service.login(this.FormularioGuardar.get('Correo').value,this.FormularioGuardar.get('Contraseña').value)
+  }
+
+  loginGoogle(){
+    this._service.loginWithGoogle();
+  }
+
+  loginFacebook(){
+    this._service.loginWithFacebook();
+  }
+
+  /*obtenerDatosUsuarioLogin() {
     this._service.obtenerUsuarioLogin(this.FormularioGuardar.get('Correo').value)
     .subscribe((userData: UsuarioModels) => {
 
@@ -74,6 +85,6 @@ export class LoginComponent implements OnInit {
   clear() {
     console.log("clear clicked")
     this.FormularioGuardar.reset();
-  }
+  }*/
 
 }

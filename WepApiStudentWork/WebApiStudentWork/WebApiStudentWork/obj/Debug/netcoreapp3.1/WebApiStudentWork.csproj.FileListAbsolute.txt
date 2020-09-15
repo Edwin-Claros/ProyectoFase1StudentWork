@@ -306,10 +306,9 @@ C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\GitProyecto\Proye
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\GitProyecto\ProyectoFase1StudentWork\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\obj\Debug\netcoreapp3.1\WebApiStudentWork.dll
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\GitProyecto\ProyectoFase1StudentWork\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\obj\Debug\netcoreapp3.1\WebApiStudentWork.pdb
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\GitProyecto\ProyectoFase1StudentWork\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\obj\Debug\netcoreapp3.1\WebApiStudentWork.genruntimeconfig.cache
-C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\appsettings.json
-C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\WebApiStudentWork - Web Deploy\profile.arm.json
+C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\WebApiStudentWork.exe
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\WebApiStudentWork.deps.json
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\WebApiStudentWork.runtimeconfig.json
@@ -348,6 +347,11 @@ C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiS
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\Microsoft.Identity.Client.dll
+C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.dll
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Contracts.dll
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Core.dll
@@ -374,6 +378,7 @@ C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiS
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\System.Composition.TypedParts.dll
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\System.Runtime.Caching.dll
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\System.Text.Json.dll
@@ -449,7 +454,6 @@ C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiS
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\obj\Debug\netcoreapp3.1\WebApiStudentWork.csprojAssemblyReference.cache
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\obj\Debug\netcoreapp3.1\WebApiStudentWork.AssemblyInfoInputs.cache
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\obj\Debug\netcoreapp3.1\WebApiStudentWork.AssemblyInfo.cs
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\obj\Debug\netcoreapp3.1\WebApiStudentWork.csproj.CoreCompileInputs.cache
@@ -461,9 +465,5 @@ C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiS
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\obj\Debug\netcoreapp3.1\WebApiStudentWork.dll
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\obj\Debug\netcoreapp3.1\WebApiStudentWork.pdb
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\obj\Debug\netcoreapp3.1\WebApiStudentWork.genruntimeconfig.cache
-C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
-C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
-C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
-C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
-C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
-C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\studentwork - Web Deploy\profile.arm.json
+C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\obj\Debug\netcoreapp3.1\WebApiStudentWork.csprojAssemblyReference.cache

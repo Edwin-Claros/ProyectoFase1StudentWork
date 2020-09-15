@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sitemanifest>
+  <IisApp path="C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\obj\Release\netcoreapp3.1\linux-x64\PubTmp\Out\" />
+  <dbfullsql path="C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\obj\Release\netcoreapp3.1\linux-x64\PubTmp\EFSQLScripts\WebApiStudentWork.DataContext.StudentWorkContext.sql" />
+</sitemanifest>

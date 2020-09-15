@@ -19,6 +19,10 @@ namespace WebApiStudentWork.Models
         public string usuarioSkype { get; set; }
         public string usuarioDireccion { get; set; }
         public string usuarioCodigoPostal { get; set; }
+        public string usuarioDescripcion { get; set; }
+        public string usuarioFacebook { get; set; }
+        public string usuarioInstagram { get; set; }
+        public string usuarioTwitter { get; set; }
         public char usuarioEstadoCivil { get; set; }
         public char usuarioVehiculoPropio { get; set; }
         public char usuarioGenero { get; set; }
@@ -29,8 +33,8 @@ namespace WebApiStudentWork.Models
 
 
         public int pais_Id { get; set; }
-        public int paisDepartamento_Id { get; set; }
-        public int paisCiudad_Id { get; set; }
+        public int? paisDepartamento_Id { get; set; }
+        public int? paisCiudad_Id { get; set; }
         public int licenciaConducir_Id { get; set; }
 
 
@@ -60,11 +64,15 @@ namespace WebApiStudentWork.Models
             builder.Property(e => e.usuarioVehiculoPropio).HasColumnType("char(1)");
             builder.Property(e => e.usuarioGenero).HasColumnType("char(1)");
             builder.Property(e => e.usuarioFechaNacimiento).HasColumnType("date");
+            builder.Property(e => e.usuarioDescripcion).HasColumnType("nvarchar(300)");
+            builder.Property(e => e.usuarioFacebook).HasColumnType("nvarchar(150)");
+            builder.Property(e => e.usuarioInstagram).HasColumnType("nvarchar(150)");
+            builder.Property(e => e.usuarioTwitter).HasColumnType("nvarchar(150)");
 
-            builder.HasOne(e => e.Pais).WithMany(e => e.Usuarios).HasForeignKey(e => e.pais_Id).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
-            builder.HasOne(e => e.PaisDepartamento).WithMany(e => e.Usuarios).HasForeignKey(e => e.paisDepartamento_Id).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
-            builder.HasOne(e => e.PaisCiudad).WithMany(e => e.Usuarios).HasForeignKey(e => e.paisCiudad_Id).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
-            builder.HasOne(e => e.LicenciaConducir).WithMany(e => e.Usuarios).HasForeignKey(e => e.licenciaConducir_Id).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(e => e.Pais).WithMany(e => e.Usuarios).HasForeignKey(e => e.pais_Id).OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(e => e.PaisDepartamento).WithMany(e => e.Usuarios).HasForeignKey(e => e.paisDepartamento_Id).OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(e => e.PaisCiudad).WithMany(e => e.Usuarios).HasForeignKey(e => e.paisCiudad_Id).OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(e => e.LicenciaConducir).WithMany(e => e.Usuarios).HasForeignKey(e => e.licenciaConducir_Id).OnDelete(DeleteBehavior.Cascade);
 
         }
     }

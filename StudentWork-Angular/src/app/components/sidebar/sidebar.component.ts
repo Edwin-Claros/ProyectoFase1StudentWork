@@ -35,7 +35,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
-    this._service.SignIngIfUserExist();
+   // this._service.SignIngIfUserExist();
   }
   isMobileMenu() {
       if ( window.innerWidth > 991) {

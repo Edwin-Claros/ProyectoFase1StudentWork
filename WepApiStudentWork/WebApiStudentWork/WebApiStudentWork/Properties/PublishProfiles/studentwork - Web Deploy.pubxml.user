@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Este archivo se usa en el proceso de publicación y empaquetado del proyecto web. Para personalizar el comportamiento de este proceso,
+edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 para obtener más información. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA2dLAr+NsSEWClBwJzAwy1wAAAAACAAAAAAAQZgAAAAEAACAAAAChXm3rr604GuyNLtz9Jx6YkmAhktZjWegCj4ZfCzCvMgAAAAAOgAAAAAIAACAAAAA559dGiCdNjZgkBTFXIa4Fzy1hUz29Ifl4sK+VtjWUm4AAAADTor/t9rmDeOolrRvUsSiRqEI2TAGLM3BgbJHuD8z+Sa730UAgO4+i1vSvuNvFYi6toeyxs94Io8xT0iIi4gsG/WbDPA96PmIXbv+d06XssKrHK3TS703nOTNbONI5Xq1C1fILvmRv+scWlR/ZRtfrnBuwaDmic4xibF9XsdR6DUAAAACv46mGdd0W1Uim9L2weURrzUUztGv0ltewG9W8QR2jBoxHHDCGE9CVzyrSNf1/8P8mnTZiWaEt+sTFq/bgKwas</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Database=studentwork-db%3b Data Source=studentwork.mysql.database.azure.com%3b User Id=EdwinClaros%40studentwork%3b Password=Eclaros.206049</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>
