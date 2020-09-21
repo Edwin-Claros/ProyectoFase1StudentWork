@@ -5,7 +5,7 @@ import {
   LocationStrategy,
   PathLocationStrategy,
 } from "@angular/common";
-import { Router } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 import Chart from "chart.js";
 import { ConexionDBService } from "../../conexion-db.service";
 
@@ -46,7 +46,7 @@ export class NavbarComponent implements OnInit {
         this.mobile_menu_visible = 0;
       }
     });
-    this.obtenerNombreUsuario = JSON.parse(localStorage.getItem("user"));
+    this.obtenerNombreUsuario = JSON.parse(sessionStorage.getItem("user"));
   }
 
   collapse() {

@@ -45,6 +45,6 @@ export class SidebarComponent implements OnInit {
   };
 
   logoutUser() {
-    localStorage.removeItem('user');
+    sessionStorage.removeItem('user');
   }
 }

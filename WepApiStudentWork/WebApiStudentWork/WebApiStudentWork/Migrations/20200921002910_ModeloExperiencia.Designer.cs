@@ -3,36 +3,22 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApiStudentWork.DataContext;
 
 namespace WebApiStudentWork.Migrations
 {
     [DbContext(typeof(StudentWorkContext))]
-    partial class StudentWorkContextModelSnapshot : ModelSnapshot
+    [Migration("20200921002910_ModeloExperiencia")]
+    partial class ModeloExperiencia
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
-
-            modelBuilder.Entity("WebApiStudentWork.Models.EmpresaSector", b =>
-                {
-                    b.Property<int>("empresaSectorId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("empresaSectorNombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(150)");
-
-                    b.HasKey("empresaSectorId");
-
-                    b.ToTable("empresaSector");
-                });
 
             modelBuilder.Entity("WebApiStudentWork.Models.Experiencia", b =>
                 {
@@ -40,9 +26,6 @@ namespace WebApiStudentWork.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("empresaSector_Id")
-                        .HasColumnType("int");
 
                     b.Property<string>("experienciaArea")
                         .IsRequired()
@@ -83,8 +66,6 @@ namespace WebApiStudentWork.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("experienciaId");
-
-                    b.HasIndex("empresaSector_Id");
 
                     b.HasIndex("usuario_Id");
 
@@ -256,12 +237,6 @@ namespace WebApiStudentWork.Migrations
 
             modelBuilder.Entity("WebApiStudentWork.Models.Experiencia", b =>
                 {
-                    b.HasOne("WebApiStudentWork.Models.EmpresaSector", "EmpresaSector")
-                        .WithMany("Experiencias")
-                        .HasForeignKey("empresaSector_Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("WebApiStudentWork.Models.Usuario", "Usuario")
                         .WithMany("Experiencias")
                         .HasForeignKey("usuario_Id")

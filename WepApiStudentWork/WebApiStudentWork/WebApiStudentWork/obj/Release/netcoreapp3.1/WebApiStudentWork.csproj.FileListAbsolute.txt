@@ -156,6 +156,7 @@ C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\GitProyecto\Proye
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Release\netcoreapp3.1\appsettings.Development.json
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Release\netcoreapp3.1\appsettings.json
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Release\netcoreapp3.1\Properties\launchSettings.json
+C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Release\netcoreapp3.1\Properties\ServiceDependencies\studentwork - Web Deploy\profile.arm.json
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Release\netcoreapp3.1\WebApiStudentWork.exe
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Release\netcoreapp3.1\WebApiStudentWork.deps.json
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Release\netcoreapp3.1\WebApiStudentWork.runtimeconfig.json
@@ -312,5 +313,4 @@ C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiS
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\obj\Release\netcoreapp3.1\WebApiStudentWork.dll
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\obj\Release\netcoreapp3.1\WebApiStudentWork.pdb
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\obj\Release\netcoreapp3.1\WebApiStudentWork.genruntimeconfig.cache
-C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Release\netcoreapp3.1\Properties\ServiceDependencies\studentwork - Web Deploy\profile.arm.json
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\obj\Release\netcoreapp3.1\WebApiStudentWork.csprojAssemblyReference.cache

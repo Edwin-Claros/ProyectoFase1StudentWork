@@ -1,35 +1,36 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { auth } from "firebase/app";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { User } from "firebase";
-import { UsuarioModel } from "./models/UsuarioModel";
 import { Observable } from "rxjs";
+import { ToastrService } from "ngx-toastr";
 
 @Injectable({
   providedIn: "root",
 })
 export class ConexionDBService {
-  obtenerDatosUsuarioLocal: any;
   userLoginFirebase: User;
+  getDatoUserApi: any;
+  obtenerDatosUser: any;
 
   constructor(
     private http: HttpClient,
     private router: Router,
-    private firebaseAuth: AngularFireAuth
+    private firebaseAuth: AngularFireAuth,
+    private toastr: ToastrService
   ) {
     this.firebaseAuth.authState.subscribe((user) => {
       if (user) {
-        this.userLoginFirebase = user;
-        localStorage.setItem("user", JSON.stringify(this.userLoginFirebase));
-        localStorage.setItem("userCorreo", this.userLoginFirebase.email);
+        sessionStorage.setItem("user", JSON.stringify(user));
+        console.log("creo ser primero");
       } else {
-        localStorage.setItem("user", null);
-        localStorage.setItem("userCorreo", null);
         this.router.navigate(["login"]);
       }
     });
+    this.getProfileUser();
+    console.log("creo ser segundo");
   }
 
   async login(email: string, password: string) {
@@ -67,13 +68,18 @@ export class ConexionDBService {
 
   async logout() {
     await this.firebaseAuth.signOut();
-    localStorage.removeItem("user");
+    sessionStorage.removeItem("user");
+    sessionStorage.removeItem("userApi");
     window.location.reload();
     this.router.navigate(["login"]);
   }
 
   get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    if (user == null) {
+      this.firebaseAuth.signOut();
+      return false;
+    }
     return user !== null;
   }
 
@@ -89,23 +95,99 @@ export class ConexionDBService {
     this.router.navigate(["dashboard"]);
   }
 
-  getDatoUser() {
+  getDatoUser(): Observable<any> {
+    var user = JSON.parse(sessionStorage.getItem("user"));
+
+    if (user == null) {
+      return null;
+    }
+
     return this.http.get(
-      `https://studentwork.azurewebsites.net/api/Usuario/${localStorage.getItem(
-        "userCorreo"
-      )}`
+      `https://studentwork.azurewebsites.net/api/Usuario/${user.email}`
     );
   }
+
   getCountries(): Observable<any> {
     return this.http.get("https://studentwork.azurewebsites.net/api/Pais");
   }
+
   getCities(): Observable<any> {
-    return this.http.get("https://studentwork.azurewebsites.net/api/PaisCiudad");
+    return this.http.get(
+      "https://studentwork.azurewebsites.net/api/PaisCiudad"
+    );
   }
+
   getState(): Observable<any> {
-    return this.http.get("https://studentwork.azurewebsites.net/api/PaisDepartamento");
+    return this.http.get(
+      "https://studentwork.azurewebsites.net/api/PaisDepartamento"
+    );
   }
+
   getLicences(): Observable<any> {
-    return this.http.get("https://studentwork.azurewebsites.net/api/LicenciaConducir");
+    return this.http.get(
+      "https://studentwork.azurewebsites.net/api/LicenciaConducir"
+    );
+  }
+
+  getProfileUser() {
+    console.log(this.getDatoUser());
+    if (this.getDatoUser() == null) {
+      sessionStorage.setItem("userApi", null);
+    } else {
+      this.getDatoUser().subscribe(
+        (result) => {
+          sessionStorage.setItem("userApi", JSON.stringify(result));
+        },
+        (error) => {
+          sessionStorage.setItem("userApi", null);
+          console.log(JSON.stringify(error));
+        }
+      );
+    }
+  }
+
+  addUser(user) {
+    let json = JSON.stringify(user);
+    let headers = new HttpHeaders().set("content-Type", "application/json");
+    return this.http.post(
+      "https://studentwork.azurewebsites.net/api/Usuario",
+      json,
+      { headers: headers }
+    );
+  }
+
+  updateUser(user, id): Observable<any> {
+    return this.http.put(
+      `https://studentwork.azurewebsites.net/api/Usuario/${id}`,
+      user
+    );
+  }
+
+  funcionError(mensaje) {
+    this.toastr.error(
+      '<span class="now-ui-icons ui-1_bell-53"></span> <b>' + mensaje + "</b>",
+      "",
+      {
+        timeOut: 5000,
+        enableHtml: true,
+        closeButton: true,
+        toastClass: "alert alert-danger alert-with-icon",
+        positionClass: "toast-bottom-right",
+      }
+    );
+  }
+
+  funcionExitosa(mensaje) {
+    this.toastr.success(
+      '<span class="now-ui-icons ui-1_bell-53"></span> <b>' + mensaje + "</b>",
+      "",
+      {
+        timeOut: 5000,
+        closeButton: true,
+        enableHtml: true,
+        toastClass: "alert alert-success alert-with-icon",
+        positionClass: "toast-bottom-right",
+      }
+    );
   }
 }

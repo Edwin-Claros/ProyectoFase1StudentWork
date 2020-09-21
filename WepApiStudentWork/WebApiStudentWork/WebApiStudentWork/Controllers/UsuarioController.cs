@@ -42,18 +42,18 @@ namespace WebApiStudentWork.Controllers
             return usuario;
         }
 
-        [HttpGet("{correo}/{contraseña}")]
-        public IActionResult GetUsuario(string correo, string contraseña)
-        {
-            var usuario = _context.Usuarios.Where(x => x.usuarioCorreo == correo && x.usuarioContraseña == contraseña ).ToList();
+        //[HttpGet("{correo}/{contraseña}")]
+        //public IActionResult GetUsuario(string correo, string contraseña)
+        //{
+        //    var usuario = _context.Usuarios.Where(x => x.usuarioCorreo == correo && x.usuarioContraseña == contraseña).ToList();
 
-            if (usuario == null)
-            {
-                return NotFound();
-            }
+        //    if (usuario == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return Ok(usuario);
-        }
+        //    return Ok(usuario);
+        //}
 
         // PUT: api/Usuario/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
@@ -93,10 +93,19 @@ namespace WebApiStudentWork.Controllers
         [HttpPost]
         public async Task<ActionResult<Usuario>> PostUsuario(Usuario usuario)
         {
+            var usuarioCorreo = _context.Usuarios.FirstOrDefault(q => q.usuarioCorreo == usuario.usuarioCorreo);
+
+            var usuarioCorreoExiste = usuarioCorreo != null;
+            if (usuarioCorreoExiste)
+            {
+                return BadRequest("El Usuario Existe");
+            }
+
+
             _context.Usuarios.Add(usuario);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUsuario", new { id = usuario.usuarioId }, usuario);
+            return CreatedAtAction("GetUsuario", new { correo = usuario.usuarioCorreo }, usuario);
         }
 
         // DELETE: api/Usuario/5

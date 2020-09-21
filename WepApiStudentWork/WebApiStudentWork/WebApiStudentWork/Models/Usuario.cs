@@ -12,8 +12,9 @@ namespace WebApiStudentWork.Models
     {
         public int usuarioId { get; set; }
         public string usuarioNombre { get; set; }
+        public string usuarioApellido { get; set; }
         public string usuarioCorreo { get; set; }
-        public string usuarioContraseña { get; set; }
+        //public string usuarioContraseña { get; set; }
         public string usuarioDNI { get; set; }
         public string usuarioTelefono { get; set; }
         public string usuarioSkype { get; set; }
@@ -43,6 +44,7 @@ namespace WebApiStudentWork.Models
         public PaisCiudad PaisCiudad { get; set; }
         public LicenciaConducir LicenciaConducir { get; set; }
 
+        public List<Experiencia> Experiencias { get; set; }
     }
 
     public class UsuarioMap : IEntityTypeConfiguration<Usuario>
@@ -53,8 +55,9 @@ namespace WebApiStudentWork.Models
             builder.HasKey(q => q.usuarioId);
             builder.Property(e => e.usuarioId).IsRequired().UseMySqlIdentityColumn();
             builder.Property(e => e.usuarioNombre).HasColumnType("nvarchar(150)").IsRequired();
+            builder.Property(e => e.usuarioApellido).HasColumnType("nvarchar(150)").IsRequired();
             builder.Property(e => e.usuarioCorreo).HasColumnType("nvarchar(150)").IsRequired();
-            builder.Property(e => e.usuarioContraseña).HasColumnType("nvarchar(150)").IsRequired();
+           // builder.Property(e => e.usuarioContraseña).HasColumnType("nvarchar(150)").IsRequired();
             builder.Property(e => e.usuarioDNI).HasColumnType("nvarchar(150)");
             builder.Property(e => e.usuarioTelefono).HasColumnType("nvarchar(150)");
             builder.Property(e => e.usuarioSkype).HasColumnType("nvarchar(150)");

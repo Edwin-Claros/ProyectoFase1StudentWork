@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
       this.usuarioCorreo = userData.usuarioCorreo;
       this.usuarioContraseña = userData.usuarioContraseña;
       if (this.FormularioGuardar.get('Contraseña').value === userData.usuarioContraseña && this.FormularioGuardar.get('Correo').value === userData.usuarioCorreo) {
-        localStorage.setItem('user',JSON.stringify(userData));
+        sessionStorage.setItem('user',JSON.stringify(userData));
         this.router.navigate(['dashboard']);
         window.location.reload();
       }

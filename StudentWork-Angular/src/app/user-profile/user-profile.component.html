@@ -4,19 +4,22 @@
     <div class="col-md-8">
       <div class="card">
         <div class="card-header">
-          <h5 class="title">Edit Profile</h5>
+          <h5 class="title">Datos Personales</h5>
         </div>
         <div class="card-body">
-          <form>
+          <form
+            [formGroup]="FormularioGuardar"
+            (ngSubmit)="onSubmit(FormularioGuardar.value)"
+          >
             <div class="row">
               <div class="col-md-5 pr-1">
                 <div class="form-group">
                   <label>Nombres</label>
                   <input
                     type="text"
+                    formControlName="usuarioNombre"
                     class="form-control"
                     placeholder="Nombres"
-                    value=""
                     [(ngModel)]="getDatoUser.usuarioNombre"
                     name="_nombre"
                   />
@@ -30,6 +33,24 @@
                     class="form-control"
                     placeholder="Apellidos"
                     value=""
+                    [(ngModel)]="getDatoUser.usuarioApellido"
+                    name="_apellido"
+                    formControlName="usuarioApellido"
+                  />
+                </div>
+              </div>
+              <div class="col-md-5 pr-1">
+                <div class="form-group">
+                  <label>Correo</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    placeholder="Correo"
+                    value=""
+                    [(ngModel)]="obtenerEmailUser.email"
+                    name="_correo"
+                    formControlName="usuarioCorreo"
+                    disabled
                   />
                 </div>
               </div>
@@ -43,6 +64,7 @@
                     value=""
                     [(ngModel)]="getDatoUser.usuarioDNI"
                     name="_dni"
+                    formControlName="usuarioDNI"
                   />
                 </div>
               </div>
@@ -55,6 +77,7 @@
                     value=""
                     [(ngModel)]="getDatoUser.usuarioFechaNacimiento"
                     name="_fechanacimiento"
+                    formControlName="usuarioFechaNacimiento"
                   />
                 </div>
               </div>
@@ -68,6 +91,7 @@
                     value=""
                     [(ngModel)]="getDatoUser.usuarioTelefono"
                     name="_telefono"
+                    formControlName="usuarioTelefono"
                   />
                 </div>
               </div>
@@ -81,6 +105,7 @@
                     value=""
                     [(ngModel)]="getDatoUser.usuarioSkype"
                     name="_skype"
+                    formControlName="usuarioSkype"
                   />
                 </div>
               </div>
@@ -92,6 +117,7 @@
                     class="form-control"
                     [(ngModel)]="getDatoUser.pais_Id"
                     name="_pais"
+                    formControlName="pais_Id"
                   >
                     <option
                       *ngFor="let indexCountry of getCountryUser"
@@ -109,6 +135,7 @@
                     class="form-control"
                     [(ngModel)]="getDatoUser.paisDepartamento_Id"
                     name="_departamento"
+                    formControlName="paisDepartamento_Id"
                   >
                     <option
                       *ngFor="let indexState of getStateUser"
@@ -126,6 +153,7 @@
                     class="form-control"
                     [(ngModel)]="getDatoUser.paisCiudad_Id"
                     name="_ciudad"
+                    formControlName="paisCiudad_Id"
                   >
                     <option
                       *ngFor="let indexCity of getCityUser"
@@ -146,6 +174,7 @@
                     value=""
                     [(ngModel)]="getDatoUser.usuarioCodigoPostal"
                     name="_postal"
+                    formControlName="usuarioCodigoPostal"
                   />
                 </div>
               </div>
@@ -159,6 +188,7 @@
                     value=""
                     [(ngModel)]="getDatoUser.usuarioDireccion"
                     name="_direccion"
+                    formControlName="usuarioDireccion"
                   />
                 </div>
               </div>
@@ -168,7 +198,8 @@
                   <select
                     class="form-control"
                     [(ngModel)]="getDatoUser.licenciaConducir_Id"
-                    name="_licencia"
+                    name="licenciaConducir_Id"
+                    formControlName="licenciaConducir_Id"
                   >
                     <option
                       *ngFor="let indexLicence of getLicencesUser"
@@ -186,17 +217,19 @@
                 <input
                   type="radio"
                   class="radio-inline"
-                  name="_genero"
+                  name="usuarioGenero"
                   value="H"
                   [(ngModel)]="getDatoUser.usuarioGenero"
+                  formControlName="usuarioGenero"
                 />&nbsp;<label> Hombre </label>
                 &nbsp;
                 <input
                   type="radio"
                   class="radio-inline"
-                  name="_genero"
+                  name="usuarioGenero"
                   value="M"
                   [(ngModel)]="getDatoUser.usuarioGenero"
+                  formControlName="usuarioGenero"
                 />&nbsp;<label> Mujer </label>
               </div>
               <div class="col-md-5 pr-1">
@@ -206,17 +239,19 @@
                 <input
                   type="radio"
                   class="radio-inline"
-                  name="_civil"
+                  name="usuarioEstadoCivil"
                   value="C"
                   [(ngModel)]="getDatoUser.usuarioEstadoCivil"
+                  formControlName="usuarioEstadoCivil"
                 />&nbsp;<label> Casado(a) </label>
                 &nbsp;
                 <input
                   type="radio"
                   class="radio-inline"
-                  name="_civil"
+                  name="usuarioEstadoCivil"
                   value="S"
                   [(ngModel)]="getDatoUser.usuarioEstadoCivil"
+                  formControlName="usuarioEstadoCivil"
                 />&nbsp;<label> Soltero(a) </label>
               </div>
               <div class="col-md-5 pr-1">
@@ -226,23 +261,26 @@
                 <input
                   type="radio"
                   class="radio"
-                  name="_vehiculo"
+                  name="usuarioVehiculoPropio"
                   value="S"
                   [(ngModel)]="getDatoUser.usuarioVehiculoPropio"
+                  formControlName="usuarioVehiculoPropio"
                 />&nbsp;<label> Si </label>
                 &nbsp;
                 <input
                   type="radio"
                   class="radio"
-                  name="_vehiculo"
+                  name="usuarioVehiculoPropio"
                   value="N"
                   [(ngModel)]="getDatoUser.usuarioVehiculoPropio"
+                  formControlName="usuarioVehiculoPropio"
                 />&nbsp;<label> No </label>
               </div>
             </div>
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
+                  <br />
                   <label>Mas Sobre Mi</label>
                   <textarea
                     rows="4"
@@ -250,8 +288,10 @@
                     class="form-control"
                     placeholder="Escribe aqui tu descripcion"
                     value=""
+                    formControlName="usuarioDescripcion"
+                    [(ngModel)]="getDatoUser.usuarioDescripcion"
+                    name="_aboutme"
                   >
-                  {{ getDatoUser.usuarioDescripcion }}
                   </textarea>
                 </div>
               </div>
@@ -266,6 +306,7 @@
                   value=""
                   [(ngModel)]="getDatoUser.usuarioInstagram"
                   name="_instagram"
+                  formControlName="usuarioInstagram"
                 />
               </div>
             </div>
@@ -279,6 +320,7 @@
                   value="}"
                   [(ngModel)]="getDatoUser.usuarioFacebook"
                   name="_facebook"
+                  formControlName="usuarioFacebook"
                 />
               </div>
             </div>
@@ -292,9 +334,18 @@
                   value=""
                   [(ngModel)]="getDatoUser.usuarioTwitter"
                   name="_twitter"
+                  formControlName="usuarioTwitter"
                 />
               </div>
             </div>
+            <button
+              mat-raised-button
+              type="submit"
+              class="btn btn-danger pull-right"
+              [disabled]="FormularioGuardar.invalid"
+            >
+              Guardar
+            </button>
           </form>
         </div>
       </div>
@@ -330,16 +381,197 @@
             <button
               href="getDatoUser.usuarioTwitter"
               class="btn btn-neutral btn-icon btn-round btn-lg"
+              (click)="goTwitter()"
             >
               <i class="fab fa-twitter"></i>
             </button>
             <button
               href=""
               class="btn btn-neutral btn-icon btn-round btn-lg"
+              (click)="goInstagram()"
             >
               <i class="fab fa-google-plus-g"></i>
             </button>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Experiencia Laboral</h5>
+        </div>
+        <div class="card-body">
+          <div class="form-row text-center">
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary" ng-hide="formVisibility" ng-click="ShowForm()">Submit</button>
+            </div>
+          </div>
+          <form
+            [formGroup]="FormularioGuardar"
+            (ngSubmit)="onSubmit(FormularioGuardar.value)"
+          >
+            <div class="row">
+              <div class="col-md-7 pr-1">
+                <div class="form-group">
+                  <label>Empresa </label>
+                  <input
+                    type="text"
+                    formControlName="usuarioNombre"
+                    class="form-control _empresa"
+                    placeholder="Empresa"
+                    [(ngModel)]="getDatoUser.usuarioNombre"
+                    name="_empresa"
+                  />
+                </div>
+              </div>
+              <div class="col-md-9 pr-1">
+                <div class="form-group">
+                  <label>¿Qué destacarias de la empresa?</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Ejemplo: Seguro médico, ambiente laboral, etc"
+                    value=""
+                    [(ngModel)]="getDatoUser.usuarioApellido"
+                    name="_destacar"
+                    formControlName="usuarioApellido"
+                  />
+                </div>
+              </div>
+              <div class="col-md-9 pr-1">
+                <div class="form-group">
+                  <label>¿Qué mejorarías de la empresa?</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Ejemplo: Dinámicas entre los compañeros"
+                    value=""
+                    [(ngModel)]="obtenerEmailUser.email"
+                    name="_mejorar"
+                    formControlName="usuarioCorreo"
+                  />
+                </div>
+              </div>
+              <div class="col-md-9 pr-1">
+                <div class="form-group">
+                  <label>Sector de empresa</label>
+                  <select
+                    placeholder="Selecciona"
+                    class="form-control"
+                    [(ngModel)]="getDatoUser.pais_Id"
+                    name="_sector"
+                    formControlName="pais_Id"
+                  >
+                    <option
+                      *ngFor="let indexCountry of getCountryUser"
+                      value="{{ indexCountry.paisId }}"
+                    >
+                      {{ indexCountry.paisNombre }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-5 pr-1">
+                <div class="form-group">
+                  <label>Cargo</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Cargo"
+                    [(ngModel)]="getDatoUser.usuarioDNI"
+                    name="_cargo"
+                    formControlName="usuarioDNI"
+                  />
+                </div>
+              </div>
+              <div class="col-md-5 pr-1">
+                <div class="form-group">
+                  <label>Área</label>
+                  <input
+                    type="text"
+                    placeholder="Área"
+                    class="form-control"
+                    value=""
+                    [(ngModel)]="getDatoUser.usuarioTelefono"
+                    name="_area"
+                    formControlName="usuarioTelefono"
+                  />
+                </div>
+              </div>
+              <div class="col-md-5 pr-1">
+                <div class="form-group">
+                  <label>Fecha que inició</label>
+                  <input
+                    type="datetime-local"
+                    class="form-control"
+                    [(ngModel)]="getDatoUser.usuarioFechaNacimiento"
+                    name="_fechaInicio"
+                    formControlName="usuarioFechaNacimiento"
+                  />
+                </div>
+              </div>
+              <div class="col-md-5 pr-1">
+                <div class="form-group">
+                  <label>Fecha que finalizó </label>
+                  <input
+                    type="datetime-local"
+                    class="form-control"
+                    [(ngModel)]="getDatoUser.usuarioFechaNacimiento"
+                    name="_fechaFinal"
+                    formControlName="usuarioFechaNacimiento"
+                  />
+                </div>
+              </div>
+              <div class="col-md-7">
+                <div class="form-group">
+                  <label>¿Recomendarías trabajar aquí?</label>
+                </div>
+                <input
+                  type="radio"
+                  class="radio-inline"
+                  name="usuarioGenero"
+                  value="S"
+                  [(ngModel)]="getDatoUser.usuarioGenero"
+                  formControlName="usuarioGenero"
+                />&nbsp;<label> Sí </label>
+                &nbsp;
+                <input
+                  type="radio"
+                  class="radio-inline"
+                  name="usuarioGenero"
+                  value="N"
+                  [(ngModel)]="getDatoUser.usuarioGenero"
+                  formControlName="usuarioGenero"
+                />&nbsp;<label> No </label>
+              </div>
+            </div>
+            <div class="col-md-12 pr-1">
+              <div class="form-group">
+                <br />
+                <label>Funciones y logros del cargo</label>
+                <textarea
+                  rows="4"
+                  cols="80"
+                  class="form-control"
+                  placeholder="Escribe aqui tus funciones y logros en el cargo"
+                  formControlName="usuarioDescripcion"
+                  [(ngModel)]="getDatoUser.usuarioDescripcion"
+                  name="_aboutme"
+                >
+                </textarea>
+              </div>
+            </div>
+            <button
+              mat-raised-button
+              type="submit"
+              class="btn btn-danger pull-right"
+              [disabled]="FormularioGuardar.invalid"
+            >
+              Guardar
+            </button>
+          </form>
         </div>
       </div>
     </div>
