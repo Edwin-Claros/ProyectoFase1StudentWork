@@ -62,17 +62,27 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
    // this._service.SignIngIfUserExist();
-    this.chartColor = "#FFFFFF";
+    this.chartColor = "#007bff";
     this.canvas = document.getElementById("bigDashboardChart");
     this.ctx = this.canvas.getContext("2d");
 
     this.gradientStroke = this.ctx.createLinearGradient(500, 0, 100, 0);
-    this.gradientStroke.addColorStop(0, '#80b6f4');
+    this.gradientStroke.addColorStop(0, '#2c2c2c');
     this.gradientStroke.addColorStop(1, this.chartColor);
 
     this.gradientFill = this.ctx.createLinearGradient(0, 200, 0, 50);
     this.gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
-    this.gradientFill.addColorStop(1, "rgba(255, 255, 255, 0.24)");
+    this.gradientFill.addColorStop(1, "rgba(0, 131, 149, 0.7)");
+
+    /*
+    this.gradientStroke = this.ctx.createLinearGradient(500, 0, 100, 0);
+    this.gradientStroke.addColorStop(0, '#80b6f4');
+    this.gradientStroke.addColorStop(1, this.chartColor);
+
+    this.gradientFill = this.ctx.createLinearGradient(0, 170, 0, 50);
+    this.gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
+    this.gradientFill.addColorStop(1, "rgba(249, 99, 59, 0.40)");
+    */
 
     this.lineBigDashboardChartData = [
         {
@@ -92,9 +102,9 @@ export class DashboardComponent implements OnInit {
        {
          backgroundColor: this.gradientFill,
          borderColor: this.chartColor,
-         pointBorderColor: this.chartColor,
-         pointBackgroundColor: "#2c2c2c",
-         pointHoverBackgroundColor: "#2c2c2c",
+         pointBorderColor: "#FFF",
+         pointBackgroundColor: "#007bff",
+         pointHoverBackgroundColor: "#007bff",
          pointHoverBorderColor: this.chartColor,
        }
      ];
@@ -122,13 +132,13 @@ export class DashboardComponent implements OnInit {
           },
           legend: {
               position: "bottom",
-              fillStyle: "#FFF",
+              fillStyle: "#2c2c2c",
               display: false
           },
           scales: {
               yAxes: [{
                   ticks: {
-                      fontColor: "rgba(255,255,255,0.4)",
+                      fontColor: "rgba(0,0,0,0.7)",
                       fontStyle: "bold",
                       beginAtZero: true,
                       maxTicksLimit: 5,
@@ -138,7 +148,7 @@ export class DashboardComponent implements OnInit {
                       drawTicks: true,
                       drawBorder: false,
                       display: true,
-                      color: "rgba(255,255,255,0.1)",
+                      color: "rgba(0,0,0,0.1)",
                       zeroLineColor: "transparent"
                   }
 
@@ -151,7 +161,8 @@ export class DashboardComponent implements OnInit {
                   },
                   ticks: {
                       padding: 10,
-                      fontColor: "rgba(255,255,255,0.4)",
+                      //fontColor: "rgba(255,255,255,0.4)",
+                      fontColor: "rgba(0,0,0,0.7)",
                       fontStyle: "bold"
                   }
               }]

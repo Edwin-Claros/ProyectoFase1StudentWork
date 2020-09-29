@@ -9,7 +9,7 @@
         vertical-align: middle;
 
         &:not(.btn):not(.dropdown-item){
-            color: $white-color;
+            color: #2c2c2c;
         }
 
         &.dropdown-item{
@@ -44,7 +44,7 @@
       .form-group-addon,
       .input-group-prepend .input-group-text,
       .input-group-append .input-group-text{
-        color: $white-color;
+        color: #2c2c2c;
 
         i {
           opacity: 1;
@@ -53,10 +53,10 @@
 
       &.no-border{
         .form-control{
-          color: $white-color;
+          color: #2c2c2c;
 
           @include placeholder(){
-            color: $white-color;
+            color: #2c2c2c;
           };
         }
       }

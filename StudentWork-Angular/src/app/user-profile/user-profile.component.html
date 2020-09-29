@@ -8,8 +8,8 @@
         </div>
         <div class="card-body">
           <form
-            [formGroup]="FormularioGuardar"
-            (ngSubmit)="onSubmit(FormularioGuardar.value)"
+            [formGroup]="FormularioUser"
+            (ngSubmit)="onSubmitUser(FormularioUser.value)"
           >
             <div class="row">
               <div class="col-md-5 pr-1">
@@ -46,7 +46,6 @@
                     type="email"
                     class="form-control"
                     placeholder="Correo"
-                    value=""
                     [(ngModel)]="obtenerEmailUser.email"
                     name="_correo"
                     formControlName="usuarioCorreo"
@@ -221,8 +220,7 @@
                   value="H"
                   [(ngModel)]="getDatoUser.usuarioGenero"
                   formControlName="usuarioGenero"
-                />&nbsp;<label> Hombre </label>
-                &nbsp;
+                />&nbsp;<label> Hombre </label> &nbsp;
                 <input
                   type="radio"
                   class="radio-inline"
@@ -243,8 +241,7 @@
                   value="C"
                   [(ngModel)]="getDatoUser.usuarioEstadoCivil"
                   formControlName="usuarioEstadoCivil"
-                />&nbsp;<label> Casado(a) </label>
-                &nbsp;
+                />&nbsp;<label> Casado(a) </label> &nbsp;
                 <input
                   type="radio"
                   class="radio-inline"
@@ -265,8 +262,7 @@
                   value="S"
                   [(ngModel)]="getDatoUser.usuarioVehiculoPropio"
                   formControlName="usuarioVehiculoPropio"
-                />&nbsp;<label> Si </label>
-                &nbsp;
+                />&nbsp;<label> Si </label> &nbsp;
                 <input
                   type="radio"
                   class="radio"
@@ -300,8 +296,8 @@
               <div class="form-group">
                 <label>Cuenta de Instagram</label>
                 <input
-                  type="text"
-                  placeholder="Cuenta de Instagram"
+                  type="url"
+                  placeholder="Link de cuenta de Instagram"
                   class="form-control"
                   value=""
                   [(ngModel)]="getDatoUser.usuarioInstagram"
@@ -314,8 +310,8 @@
               <div class="form-group">
                 <label>Cuenta de Facebook</label>
                 <input
-                  type="text"
-                  placeholder="Cuenta de Facebook"
+                  type="url"
+                  placeholder="Link de cuenta de Facebook"
                   class="form-control"
                   value="}"
                   [(ngModel)]="getDatoUser.usuarioFacebook"
@@ -328,8 +324,8 @@
               <div class="form-group">
                 <label>Cuenta de Twitter</label>
                 <input
-                  type="text"
-                  placeholder="Cuenta de Twitter"
+                  type="url"
+                  placeholder="Link de cuenta de Twitter"
                   class="form-control"
                   value=""
                   [(ngModel)]="getDatoUser.usuarioTwitter"
@@ -342,7 +338,7 @@
               mat-raised-button
               type="submit"
               class="btn btn-danger pull-right"
-              [disabled]="FormularioGuardar.invalid"
+              [disabled]="FormularioUser.invalid"
             >
               Guardar
             </button>
@@ -390,13 +386,13 @@
               class="btn btn-neutral btn-icon btn-round btn-lg"
               (click)="goInstagram()"
             >
-              <i class="fab fa-google-plus-g"></i>
-            </button>
+            <i class="fab fa-instagram"></i>
+          </button>
           </div>
         </div>
       </div>
     </div>
-
+    <!-- Experiencia Laboral -->
     <div class="col-md-8">
       <div class="card">
         <div class="card-header">
@@ -404,13 +400,24 @@
         </div>
         <div class="card-body">
           <div class="form-row text-center">
-            <div class="col-12">
-                <button type="submit" class="btn btn-primary" ng-hide="formVisibility" ng-click="ShowForm()">Submit</button>
+            <div
+              class="col-12"
+              (click)="showFormExperiencia = !showFormExperiencia"
+            >
+              <div *ngIf="!showFormExperiencia; else close">
+                <p>Añadir</p>
+                <i class="now-ui-icons arrows-1_minimal-down"></i>
+              </div>
+              <ng-template #close>
+                <p>Cerrar</p>
+                <i class="now-ui-icons arrows-1_minimal-up"></i>
+              </ng-template>
             </div>
           </div>
           <form
-            [formGroup]="FormularioGuardar"
-            (ngSubmit)="onSubmit(FormularioGuardar.value)"
+            [formGroup]="FormularioExperiencia"
+            (ngSubmit)="onSubmitExperiencia(FormularioExperiencia.value)"
+            *ngIf="showFormExperiencia"
           >
             <div class="row">
               <div class="col-md-7 pr-1">
@@ -418,10 +425,9 @@
                   <label>Empresa </label>
                   <input
                     type="text"
-                    formControlName="usuarioNombre"
+                    formControlName="experienciaEmpresa"
                     class="form-control _empresa"
                     placeholder="Empresa"
-                    [(ngModel)]="getDatoUser.usuarioNombre"
                     name="_empresa"
                   />
                 </div>
@@ -433,10 +439,8 @@
                     type="text"
                     class="form-control"
                     placeholder="Ejemplo: Seguro médico, ambiente laboral, etc"
-                    value=""
-                    [(ngModel)]="getDatoUser.usuarioApellido"
                     name="_destacar"
-                    formControlName="usuarioApellido"
+                    formControlName="experienciaDestacar"
                   />
                 </div>
               </div>
@@ -447,10 +451,8 @@
                     type="text"
                     class="form-control"
                     placeholder="Ejemplo: Dinámicas entre los compañeros"
-                    value=""
-                    [(ngModel)]="obtenerEmailUser.email"
                     name="_mejorar"
-                    formControlName="usuarioCorreo"
+                    formControlName="experienciaMejorar"
                   />
                 </div>
               </div>
@@ -460,15 +462,14 @@
                   <select
                     placeholder="Selecciona"
                     class="form-control"
-                    [(ngModel)]="getDatoUser.pais_Id"
                     name="_sector"
-                    formControlName="pais_Id"
+                    formControlName="empresaSector_Id"
                   >
                     <option
-                      *ngFor="let indexCountry of getCountryUser"
-                      value="{{ indexCountry.paisId }}"
+                      *ngFor="let indexEmpresaSector of getEmpresaSectorUser"
+                      value="{{ indexEmpresaSector.empresaSectorId }}"
                     >
-                      {{ indexCountry.paisNombre }}
+                      {{ indexEmpresaSector.empresaSectorNombre }}
                     </option>
                   </select>
                 </div>
@@ -480,9 +481,8 @@
                     type="text"
                     class="form-control"
                     placeholder="Cargo"
-                    [(ngModel)]="getDatoUser.usuarioDNI"
                     name="_cargo"
-                    formControlName="usuarioDNI"
+                    formControlName="experienciaCargo"
                   />
                 </div>
               </div>
@@ -493,10 +493,8 @@
                     type="text"
                     placeholder="Área"
                     class="form-control"
-                    value=""
-                    [(ngModel)]="getDatoUser.usuarioTelefono"
                     name="_area"
-                    formControlName="usuarioTelefono"
+                    formControlName="experienciaArea"
                   />
                 </div>
               </div>
@@ -506,9 +504,8 @@
                   <input
                     type="datetime-local"
                     class="form-control"
-                    [(ngModel)]="getDatoUser.usuarioFechaNacimiento"
                     name="_fechaInicio"
-                    formControlName="usuarioFechaNacimiento"
+                    formControlName="experienciaFechaInicio"
                   />
                 </div>
               </div>
@@ -518,9 +515,8 @@
                   <input
                     type="datetime-local"
                     class="form-control"
-                    [(ngModel)]="getDatoUser.usuarioFechaNacimiento"
                     name="_fechaFinal"
-                    formControlName="usuarioFechaNacimiento"
+                    formControlName="experienciaFechaFinal"
                   />
                 </div>
               </div>
@@ -531,19 +527,16 @@
                 <input
                   type="radio"
                   class="radio-inline"
-                  name="usuarioGenero"
+                  name="experienciaRecomendacion"
                   value="S"
-                  [(ngModel)]="getDatoUser.usuarioGenero"
-                  formControlName="usuarioGenero"
-                />&nbsp;<label> Sí </label>
-                &nbsp;
+                  formControlName="experienciaRecomendacion"
+                />&nbsp;<label> Sí </label> &nbsp;
                 <input
                   type="radio"
                   class="radio-inline"
-                  name="usuarioGenero"
+                  name="experienciaRecomendacion"
                   value="N"
-                  [(ngModel)]="getDatoUser.usuarioGenero"
-                  formControlName="usuarioGenero"
+                  formControlName="experienciaRecomendacion"
                 />&nbsp;<label> No </label>
               </div>
             </div>
@@ -556,9 +549,8 @@
                   cols="80"
                   class="form-control"
                   placeholder="Escribe aqui tus funciones y logros en el cargo"
-                  formControlName="usuarioDescripcion"
-                  [(ngModel)]="getDatoUser.usuarioDescripcion"
-                  name="_aboutme"
+                  formControlName="experienciaFuncionesYLogros"
+                  name="_funcionesylogros"
                 >
                 </textarea>
               </div>
@@ -567,12 +559,956 @@
               mat-raised-button
               type="submit"
               class="btn btn-danger pull-right"
-              [disabled]="FormularioGuardar.invalid"
+              [disabled]="FormularioExperiencia.invalid"
             >
               Guardar
             </button>
           </form>
+          <br />
+          <div>
+            <br />
+          </div>
+          <br />
+          <div
+            class="col-md-12"
+            *ngFor="let indexExperiencia of getExperiencia"
+          >
+            <div class="card card-tasks">
+              <div class="card-body">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              checked
+                            />
+                            <span class="form-check-sign"></span>
+                          </label>
+                        </div>
+                      </td>
+                      <td class="text-left">
+                        <br />
+                        <div>
+                          <p>
+                            {{ indexExperiencia.experienciaCargo }}
+                          </p>
+                          <p>
+                            {{ indexExperiencia.experienciaEmpresa }}
+                          </p>
+                        </div>
+                      </td>
+                      <td class="td-actions text-right">
+                        <button
+                          type="button"
+                          (click)="editExperiencia(indexExperiencia)"
+                          class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral"
+                          data-dismiss="modal"
+                          data-toggle="modal"
+                          data-target="#exampleModal"
+                        >
+                          <i class="now-ui-icons ui-2_settings-90"></i>
+                        </button>
+                        <button
+                          type="button"
+                          rel="tooltip"
+                          (click)="
+                            deleteExperiencia(indexExperiencia.experienciaId)
+                          "
+                          title=""
+                          class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral"
+                          data-original-title="Remove"
+                        >
+                          <i class="now-ui-icons ui-1_simple-remove"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
+    <!-- Formación -->
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Formación académica</h5>
+        </div>
+        <div class="card-body">
+          <div class="form-row text-center">
+            <div
+              class="col-12"
+              (click)="showFormFormacion = !showFormFormacion"
+            >
+              <div *ngIf="!showFormFormacion; else close">
+                <p>Añadir</p>
+                <i class="now-ui-icons arrows-1_minimal-down"></i>
+              </div>
+              <ng-template #close>
+                <p>Cerrar</p>
+                <i class="now-ui-icons arrows-1_minimal-up"></i>
+              </ng-template>
+            </div>
+          </div>
+          <form
+            [formGroup]="FormularioFormacion"
+            (ngSubmit)="onSubmitFormacion(FormularioFormacion.value)"
+            *ngIf="showFormFormacion"
+          >
+            <div class="row">
+              <div class="col-md-7 pr-1">
+                <div class="form-group">
+                  <label>Casa de estudio</label>
+                  <input
+                    type="text"
+                    formControlName="formacionCentroEducativo"
+                    class="form-control _centroeducativo"
+                    placeholder="Casa de estudio"
+                    name="_centroeducativo"
+                  />
+                </div>
+              </div>
+              <div class="col-md-9 pr-1">
+                <div class="form-group">
+                  <label>Nivel de estudio</label>
+                  <select
+                    placeholder="Selecciona"
+                    class="form-control"
+                    name="_nivelestudio"
+                    formControlName="nivelEstudio_Id"
+                  >
+                    <option
+                      *ngFor="let indexFormacion of getNivelEstudioUser"
+                      value="{{ indexFormacion.nivelEstudioId }}"
+                    >
+                      {{ indexFormacion.nivelEstudioNombre }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <br />
+              <div class="col-md-9 pr-1">
+                <div class="form-group">
+                  <label>Área de estudio</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Área de estudio"
+                    name="_areaestudio"
+                    formControlName="formacionAreaDeEstudio"
+                  />
+                </div>
+              </div>
+              <br />
+              <div class="col-md-7">
+                <div class="form-group">
+                  <label>Nivel del profesorado</label>
+                  <label> ¿Del 1 al 5, cuál seria su clasificación? </label>
+                  <p>
+                    <input
+                      type="radio"
+                      class="radio-inline"
+                      name="formacionNivelProfesorado"
+                      value="1"
+                      formControlName="formacionNivelProfesorado"
+                    />&nbsp;<label> 1 </label> &nbsp;
+                    <input
+                      type="radio"
+                      class="radio-inline"
+                      name="formacionNivelProfesorado"
+                      value="2"
+                      formControlName="formacionNivelProfesorado"
+                    />&nbsp;<label> 2 </label> &nbsp;
+                    <input
+                      type="radio"
+                      class="radio-inline"
+                      name="formacionNivelProfesorado"
+                      value="3"
+                      formControlName="formacionNivelProfesorado"
+                    />&nbsp;<label> 3 </label> &nbsp;
+                    <input
+                      type="radio"
+                      class="radio-inline"
+                      name="formacionNivelProfesorado"
+                      value="4"
+                      formControlName="formacionNivelProfesorado"
+                    />&nbsp;<label> 4 </label> &nbsp;
+                    <input
+                      type="radio"
+                      class="radio-inline"
+                      name="formacionNivelProfesorado"
+                      value="5"
+                      formControlName="formacionNivelProfesorado"
+                    />&nbsp;<label> 5 </label> &nbsp;
+                  </p>
+                </div>
+              </div>
+              <br />
+              <div class="col-md-7">
+                <div class="form-group">
+                  <label>Satisfacción con el aprendizaje</label>
+                  <label> ¿Del 1 al 5, cuál seria su clasificación? </label>
+                  <p>
+                    <input
+                      type="radio"
+                      class="radio-inline"
+                      name="formacionSatisfaccionprendizaje"
+                      value="1"
+                      formControlName="formacionSatisfaccionprendizaje"
+                    />&nbsp;<label> 1 </label> &nbsp;
+                    <input
+                      type="radio"
+                      class="radio-inline"
+                      name="formacionSatisfaccionprendizaje"
+                      value="2"
+                      formControlName="formacionSatisfaccionprendizaje"
+                    />&nbsp;<label> 2 </label> &nbsp;
+                    <input
+                      type="radio"
+                      class="radio-inline"
+                      name="formacionSatisfaccionprendizaje"
+                      value="3"
+                      formControlName="formacionSatisfaccionprendizaje"
+                    />&nbsp;<label> 3 </label> &nbsp;
+                    <input
+                      type="radio"
+                      class="radio-inline"
+                      name="formacionSatisfaccionprendizaje"
+                      value="4"
+                      formControlName="formacionSatisfaccionprendizaje"
+                    />&nbsp;<label> 4 </label> &nbsp;
+                    <input
+                      type="radio"
+                      class="radio-inline"
+                      name="formacionSatisfaccionprendizaje"
+                      value="5"
+                      formControlName="formacionSatisfaccionprendizaje"
+                    />&nbsp;<label> 5 </label> &nbsp;
+                  </p>
+                </div>
+              </div>
+              <br />
+              <div class="col-md-7">
+                <div class="form-group">
+                  <label>Acceso a mejor empleo</label>
+                  <label> ¿Del 1 al 5, cuál seria su clasificación? </label>
+                  <p>
+                    <input
+                      type="radio"
+                      class="radio-inline"
+                      name="formacionAccesoAEmpleo"
+                      value="1"
+                      formControlName="formacionAccesoAEmpleo"
+                    />&nbsp;<label> 1 </label> &nbsp;
+                    <input
+                      type="radio"
+                      class="radio-inline"
+                      name="formacionAccesoAEmpleo"
+                      value="2"
+                      formControlName="formacionAccesoAEmpleo"
+                    />&nbsp;<label> 2 </label> &nbsp;
+                    <input
+                      type="radio"
+                      class="radio-inline"
+                      name="formacionAccesoAEmpleo"
+                      value="3"
+                      formControlName="formacionAccesoAEmpleo"
+                    />&nbsp;<label> 3 </label> &nbsp;
+                    <input
+                      type="radio"
+                      class="radio-inline"
+                      name="formacionAccesoAEmpleo"
+                      value="4"
+                      formControlName="formacionAccesoAEmpleo"
+                    />&nbsp;<label> 4 </label> &nbsp;
+                    <input
+                      type="radio"
+                      class="radio-inline"
+                      name="formacionAccesoAEmpleo"
+                      value="5"
+                      formControlName="formacionAccesoAEmpleo"
+                    />&nbsp;<label> 5 </label> &nbsp;
+                  </p>
+                </div>
+              </div>
+              <br />
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Estado</label>
+                  <p>
+                    <input
+                      type="radio"
+                      class="radio-inline"
+                      name="formacionEstado"
+                      value="culminado"
+                      formControlName="formacionEstado"
+                    />&nbsp;<label> Culminado </label> &nbsp;
+                    <input
+                      type="radio"
+                      class="radio-inline"
+                      name="formacionEstado"
+                      value="cursando"
+                      formControlName="formacionEstado"
+                    />&nbsp;<label> Cursando </label> &nbsp;
+                    <input
+                      type="radio"
+                      class="radio-inline"
+                      name="formacionEstado"
+                      value="abandonado"
+                      formControlName="formacionEstado"
+                    />&nbsp;<label> Abandonado / Aplazo </label>
+                  </p>
+                </div>
+              </div>
+              <br />
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>¿Recomendarías esta casa de estudio?</label>
+                  <p>
+                    <input
+                      type="radio"
+                      class="radio-inline"
+                      name="formacionRecomendacion"
+                      value="S"
+                      formControlName="formacionRecomendacion"
+                    />&nbsp;<label> Sí </label> &nbsp;
+                    <input
+                      type="radio"
+                      class="radio-inline"
+                      name="formacionRecomendacion"
+                      value="N"
+                      formControlName="formacionRecomendacion"
+                    />&nbsp;<label> No </label>
+                  </p>
+                </div>
+              </div>
+              <br />
+              <div class="col-md-5 pr-1">
+                <div class="form-group">
+                  <label>Fecha que inició</label>
+                  <input
+                    type="datetime-local"
+                    class="form-control"
+                    name="_fechainicioformacion"
+                    formControlName="formacionFechaInicio"
+                  />
+                </div>
+              </div>
+              <br />
+              <div class="col-md-5 pr-1">
+                <div class="form-group">
+                  <label>Fecha que finalizó </label>
+                  <input
+                    type="datetime-local"
+                    class="form-control"
+                    name="_fechafinalformacion"
+                    formControlName="formacionFechaFinal"
+                  />
+                </div>
+              </div>
+              <br />
+            </div>
+            <button
+              mat-raised-button
+              type="submit"
+              class="btn btn-danger pull-right"
+              [disabled]="FormularioFormacion.invalid"
+            >
+              Guardar
+            </button>
+          </form>
+          <br />
+          <div>
+            <br />
+          </div>
+          <br />
+          <div class="col-md-12" *ngFor="let indexFormacion of getFormacion">
+            <div class="card card-tasks">
+              <div class="card-body">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              checked
+                            />
+                            <span class="form-check-sign"></span>
+                          </label>
+                        </div>
+                      </td>
+                      <td class="text-left">
+                        <br />
+                        <div>
+                          <p>
+                            {{ indexFormacion.formacionCentroEducativo }}
+                          </p>
+                          <p>
+                            {{ indexFormacion.formacionAreaDeEstudio }}
+                          </p>
+                        </div>
+                      </td>
+                      <td class="td-actions text-right">
+                        <button
+                          type="button"
+                          (click)="editFormacion(indexFormacion)"
+                          class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral"
+                          data-dismiss="modal"
+                          data-toggle="modal"
+                          data-target="#exampleModalPrueba"
+                        >
+                          <i class="now-ui-icons ui-2_settings-90"></i>
+                        </button>
+                        <button
+                          type="button"
+                          rel="tooltip"
+                          (click)="deleteFormacion(indexFormacion.formacionId)"
+                          title=""
+                          class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral"
+                          data-original-title="Remove"
+                        >
+                          <i class="now-ui-icons ui-1_simple-remove"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal Experiencia -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Editar experiencia laboral en
+          <b>{{ getExperienciaedit.experienciaEmpresa }}</b>
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form
+          [formGroup]="FormularioExperienciaModal"
+          (ngSubmit)="
+            onSubmitExperienciaUpdate(FormularioExperienciaModal.value)
+          "
+        >
+          <div class="row">
+            <div class="col-md-7 pr-1">
+              <div class="form-group">
+                <label>Empresa </label>
+                <input
+                  type="text"
+                  formControlName="experienciaEmpresaModal"
+                  class="form-control"
+                  placeholder="Empresa"
+                  name="_modalempresa"
+                  [(ngModel)]="getExperienciaedit.experienciaEmpresa"
+                />
+              </div>
+            </div>
+            <div class="col-md-9 pr-1">
+              <div class="form-group">
+                <label>¿Qué destacarias de la empresa?</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Ejemplo: Seguro médico, ambiente laboral, etc"
+                  name="_modaldestacar"
+                  formControlName="experienciaDestacarModal"
+                  [(ngModel)]="getExperienciaedit.experienciaDestacar"
+                />
+              </div>
+            </div>
+            <div class="col-md-9 pr-1">
+              <div class="form-group">
+                <label>¿Qué mejorarías de la empresa?</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Ejemplo: Dinámicas entre los compañeros"
+                  name="_modalmejorar"
+                  formControlName="experienciaMejorarModal"
+                  [(ngModel)]="getExperienciaedit.experienciaMejorar"
+                />
+              </div>
+            </div>
+            <div class="col-md-9 pr-1">
+              <div class="form-group">
+                <label>Sector de empresa</label>
+                <select
+                  placeholder="Selecciona"
+                  class="form-control"
+                  name="_modalsector"
+                  formControlName="empresaSector_IdModal"
+                  [(ngModel)]="getExperienciaedit.empresaSector_Id"
+                >
+                  <option
+                    *ngFor="let indexEmpresaSector of getEmpresaSectorUser"
+                    value="{{ indexEmpresaSector.empresaSectorId }}"
+                  >
+                    {{ indexEmpresaSector.empresaSectorNombre }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-5 pr-1">
+              <div class="form-group">
+                <label>Cargo</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Cargo"
+                  name="_modalcargo"
+                  formControlName="experienciaCargoModal"
+                  [(ngModel)]="getExperienciaedit.experienciaCargo"
+                />
+              </div>
+            </div>
+            <div class="col-md-5 pr-1">
+              <div class="form-group">
+                <label>Área</label>
+                <input
+                  type="text"
+                  placeholder="Área"
+                  class="form-control"
+                  name="_modalarea"
+                  formControlName="experienciaAreaModal"
+                  [(ngModel)]="getExperienciaedit.experienciaArea"
+                />
+              </div>
+            </div>
+            <div class="col-md-5 pr-1">
+              <div class="form-group">
+                <label>Fecha que inició</label>
+                <input
+                  type="datetime-local"
+                  class="form-control"
+                  name="_modalfechaInicio"
+                  formControlName="experienciaFechaInicioModal"
+                  [(ngModel)]="getExperienciaedit.experienciaFechaInicio"
+                />
+              </div>
+            </div>
+            <div class="col-md-5 pr-1">
+              <div class="form-group">
+                <label>Fecha que finalizó </label>
+                <input
+                  type="datetime-local"
+                  class="form-control"
+                  name="_modalfechaFinal"
+                  formControlName="experienciaFechaFinalModal"
+                  [(ngModel)]="getExperienciaedit.experienciaFechaFinal"
+                />
+              </div>
+            </div>
+            <div class="col-md-7">
+              <div class="form-group">
+                <label>¿Recomendarías trabajar aquí?</label>
+              </div>
+              <input
+                type="radio"
+                class="radio-inline"
+                name="experienciaRecomendacionModal"
+                value="S"
+                formControlName="experienciaRecomendacionModal"
+                [(ngModel)]="getExperienciaedit.experienciaRecomendacion"
+              />&nbsp;<label> Sí </label> &nbsp;
+              <input
+                type="radio"
+                class="radio-inline"
+                name="experienciaRecomendacionModal"
+                value="N"
+                formControlName="experienciaRecomendacionModal"
+                [(ngModel)]="getExperienciaedit.experienciaRecomendacion"
+              />&nbsp;<label> No </label>
+            </div>
+          </div>
+          <div class="col-md-12 pr-1">
+            <div class="form-group">
+              <br />
+              <label>Funciones y logros del cargo</label>
+              <textarea
+                rows="4"
+                cols="80"
+                class="form-control"
+                placeholder="Escribe aqui tus funciones y logros en el cargo"
+                formControlName="experienciaFuncionesYLogrosModal"
+                name="_modalfuncionesylogros"
+                [(ngModel)]="getExperienciaedit.experienciaFuncionesYLogros"
+              >
+              </textarea>
+            </div>
+          </div>
+          <button
+            mat-raised-button
+            type="submit"
+            class="btn btn-danger pull-right"
+            [disabled]="FormularioExperienciaModal.invalid"
+          >
+            Actualizar
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal Formacion -->
+<div
+  class="modal fade"
+  id="exampleModalPrueba"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Editar Formación académica en
+          <b>{{ getFormacionedit.formacionCentroEducativo }}</b>
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form
+          [formGroup]="FormularioFormacionModal"
+          (ngSubmit)="onSubmitFormacionUpdate(FormularioFormacionModal.value)"
+        >
+          <div class="row">
+            <div class="col-md-7 pr-1">
+              <div class="form-group">
+                <label>Casa de estudio</label>
+                <input
+                  type="text"
+                  formControlName="formacionCentroEducativoModal"
+                  class="form-control _centroeducativo"
+                  placeholder="Casa de estudio"
+                  name="_centroeducativo"
+                  [(ngModel)]="getFormacionedit.formacionCentroEducativo"
+                />
+              </div>
+            </div>
+            <div class="col-md-9 pr-1">
+              <div class="form-group">
+                <label>Nivel de estudio</label>
+                <select
+                  placeholder="Selecciona"
+                  class="form-control"
+                  name="_nivelestudio"
+                  formControlName="nivelEstudio_IdModal"
+                  [(ngModel)]="getFormacionedit.nivelEstudio_Id"
+                >
+                  <option
+                    *ngFor="let indexFormacion of getNivelEstudioUser"
+                    value="{{ indexFormacion.nivelEstudioId }}"
+                  >
+                    {{ indexFormacion.nivelEstudioNombre }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <br />
+            <div class="col-md-9 pr-1">
+              <div class="form-group">
+                <label>Área de estudio</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Área de estudio"
+                  name="_areaestudio"
+                  formControlName="formacionAreaDeEstudioModal"
+                  [(ngModel)]="getFormacionedit.formacionAreaDeEstudio"
+                />
+              </div>
+            </div>
+            <br />
+            <div class="col-md-7">
+              <div class="form-group">
+                <label>Nivel del profesorado</label>
+                <label> ¿Del 1 al 5, cuál seria su clasificación? </label>
+                <p>
+                  <input
+                    type="radio"
+                    class="radio-inline"
+                    name="formacionNivelProfesoradoModal"
+                    value="1"
+                    formControlName="formacionNivelProfesoradoModal"
+                    [(ngModel)]="getFormacionedit.formacionNivelProfesorado"
+                  />&nbsp;<label> 1 </label> &nbsp;
+                  <input
+                    type="radio"
+                    class="radio-inline"
+                    name="formacionNivelProfesoradoModal"
+                    value="2"
+                    formControlName="formacionNivelProfesoradoModal"
+                    [(ngModel)]="getFormacionedit.formacionNivelProfesorado"
+                  />&nbsp;<label> 2 </label> &nbsp;
+                  <input
+                    type="radio"
+                    class="radio-inline"
+                    name="formacionNivelProfesoradoModal"
+                    value="3"
+                    formControlName="formacionNivelProfesoradoModal"
+                    [(ngModel)]="getFormacionedit.formacionNivelProfesorado"
+                  />&nbsp;<label> 3 </label> &nbsp;
+                  <input
+                    type="radio"
+                    class="radio-inline"
+                    name="formacionNivelProfesoradoModal"
+                    value="4"
+                    formControlName="formacionNivelProfesoradoModal"
+                    [(ngModel)]="getFormacionedit.formacionNivelProfesorado"
+                  />&nbsp;<label> 4 </label> &nbsp;
+                  <input
+                    type="radio"
+                    class="radio-inline"
+                    name="formacionNivelProfesoradoModal"
+                    value="5"
+                    formControlName="formacionNivelProfesoradoModal"
+                    [(ngModel)]="getFormacionedit.formacionNivelProfesorado"
+                  />&nbsp;<label> 5 </label> &nbsp;
+                </p>
+              </div>
+            </div>
+            <br />
+            <div class="col-md-7">
+              <div class="form-group">
+                <label>Satisfacción con el aprendizaje</label>
+                <label> ¿Del 1 al 5, cuál seria su clasificación? </label>
+                <p>
+                  <input
+                    type="radio"
+                    class="radio-inline"
+                    name="formacionSatisfaccionprendizajeModal"
+                    value="1"
+                    formControlName="formacionSatisfaccionprendizajeModal"
+                    [(ngModel)]="
+                      getFormacionedit.formacionSatisfaccionprendizaje
+                    "
+                  />&nbsp;<label> 1 </label> &nbsp;
+                  <input
+                    type="radio"
+                    class="radio-inline"
+                    name="formacionSatisfaccionprendizajeModal"
+                    value="2"
+                    formControlName="formacionSatisfaccionprendizajeModal"
+                    [(ngModel)]="
+                      getFormacionedit.formacionSatisfaccionprendizaje
+                    "
+                  />&nbsp;<label> 2 </label> &nbsp;
+                  <input
+                    type="radio"
+                    class="radio-inline"
+                    name="formacionSatisfaccionprendizajeModal"
+                    value="3"
+                    formControlName="formacionSatisfaccionprendizajeModal"
+                    [(ngModel)]="
+                      getFormacionedit.formacionSatisfaccionprendizaje
+                    "
+                  />&nbsp;<label> 3 </label> &nbsp;
+                  <input
+                    type="radio"
+                    class="radio-inline"
+                    name="formacionSatisfaccionprendizajeModal"
+                    value="4"
+                    formControlName="formacionSatisfaccionprendizajeModal"
+                    [(ngModel)]="
+                      getFormacionedit.formacionSatisfaccionprendizaje
+                    "
+                  />&nbsp;<label> 4 </label> &nbsp;
+                  <input
+                    type="radio"
+                    class="radio-inline"
+                    name="formacionSatisfaccionprendizajeModal"
+                    value="5"
+                    formControlName="formacionSatisfaccionprendizajeModal"
+                    [(ngModel)]="
+                      getFormacionedit.formacionSatisfaccionprendizaje
+                    "
+                  />&nbsp;<label> 5 </label> &nbsp;
+                </p>
+              </div>
+            </div>
+            <br />
+            <div class="col-md-7">
+              <div class="form-group">
+                <label>Acceso a mejor empleo</label>
+                <label> ¿Del 1 al 5, cuál seria su clasificación? </label>
+                <p>
+                  <input
+                    type="radio"
+                    class="radio-inline"
+                    name="formacionAccesoAEmpleoModal"
+                    value="1"
+                    formControlName="formacionAccesoAEmpleoModal"
+                    [(ngModel)]="getFormacionedit.formacionAccesoAEmpleo"
+                  />&nbsp;<label> 1 </label> &nbsp;
+                  <input
+                    type="radio"
+                    class="radio-inline"
+                    name="formacionAccesoAEmpleoModal"
+                    value="2"
+                    formControlName="formacionAccesoAEmpleoModal"
+                    [(ngModel)]="getFormacionedit.formacionAccesoAEmpleo"
+                  />&nbsp;<label> 2 </label> &nbsp;
+                  <input
+                    type="radio"
+                    class="radio-inline"
+                    name="formacionAccesoAEmpleoModal"
+                    value="3"
+                    formControlName="formacionAccesoAEmpleoModal"
+                    [(ngModel)]="getFormacionedit.formacionAccesoAEmpleo"
+                  />&nbsp;<label> 3 </label> &nbsp;
+                  <input
+                    type="radio"
+                    class="radio-inline"
+                    name="formacionAccesoAEmpleoModal"
+                    value="4"
+                    formControlName="formacionAccesoAEmpleoModal"
+                    [(ngModel)]="getFormacionedit.formacionAccesoAEmpleo"
+                  />&nbsp;<label> 4 </label> &nbsp;
+                  <input
+                    type="radio"
+                    class="radio-inline"
+                    name="formacionAccesoAEmpleoModal"
+                    value="5"
+                    formControlName="formacionAccesoAEmpleoModal"
+                    [(ngModel)]="getFormacionedit.formacionAccesoAEmpleo"
+                  />&nbsp;<label> 5 </label> &nbsp;
+                </p>
+              </div>
+            </div>
+            <br />
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Estado</label>
+                <p>
+                  <input
+                    type="radio"
+                    class="radio-inline"
+                    name="formacionEstadoModal"
+                    value="culminado"
+                    formControlName="formacionEstadoModal"
+                    [(ngModel)]="getFormacionedit.formacionEstado"
+                  />&nbsp;<label> Culminado </label> &nbsp;
+                  <input
+                    type="radio"
+                    class="radio-inline"
+                    name="formacionEstadoModal"
+                    value="cursando"
+                    formControlName="formacionEstadoModal"
+                    [(ngModel)]="getFormacionedit.formacionEstado"
+                  />&nbsp;<label> Cursando </label> &nbsp;
+                  <input
+                    type="radio"
+                    class="radio-inline"
+                    name="formacionEstadoModal"
+                    value="abandonado"
+                    formControlName="formacionEstadoModal"
+                    [(ngModel)]="getFormacionedit.formacionEstado"
+                  />&nbsp;<label> Abandonado / Aplazo </label>
+                </p>
+              </div>
+            </div>
+            <br />
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>¿Recomendarías esta casa de estudio?</label>
+                <p>
+                  <input
+                    type="radio"
+                    class="radio-inline"
+                    name="formacionRecomendacionModal"
+                    value="S"
+                    formControlName="formacionRecomendacionModal"
+                    [(ngModel)]="getFormacionedit.formacionRecomendacion"
+                  />&nbsp;<label> Sí </label> &nbsp;
+                  <input
+                    type="radio"
+                    class="radio-inline"
+                    name="formacionRecomendacionModal"
+                    value="N"
+                    formControlName="formacionRecomendacionModal"
+                    [(ngModel)]="getFormacionedit.formacionRecomendacion"
+                  />&nbsp;<label> No </label>
+                </p>
+              </div>
+            </div>
+            <br />
+            <div class="col-md-5 pr-1">
+              <div class="form-group">
+                <label>Fecha que inició</label>
+                <input
+                  type="datetime-local"
+                  class="form-control"
+                  name="_fechainicioformacion"
+                  formControlName="formacionFechaInicioModal"
+                  [(ngModel)]="getFormacionedit.formacionFechaInicio"
+                />
+              </div>
+            </div>
+            <br />
+            <div class="col-md-5 pr-1">
+              <div class="form-group">
+                <label>Fecha que finalizó </label>
+                <input
+                  type="datetime-local"
+                  class="form-control"
+                  name="_fechafinalformacion"
+                  formControlName="formacionFechaFinalModal"
+                  [(ngModel)]="getFormacionedit.formacionFechaFinal"
+                />
+              </div>
+            </div>
+            <br />
+          </div>
+          <button
+            mat-raised-button
+            type="submit"
+            class="btn btn-danger pull-right"
+            [disabled]="FormularioFormacionModal.invalid"
+          >
+            Actualizar
+          </button>
+        </form>
       </div>
     </div>
   </div>

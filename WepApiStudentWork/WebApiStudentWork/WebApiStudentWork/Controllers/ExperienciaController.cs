@@ -29,10 +29,23 @@ namespace WebApiStudentWork.Controllers
         }
 
         // GET: api/Experiencia/5
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<Experiencia>> GetExperiencia(int id)
+        //{
+        //    var experiencia = await _context.Experiencias.FindAsync(id);
+
+        //    if (experiencia == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return experiencia;
+        //}
+
         [HttpGet("{id}")]
-        public async Task<ActionResult<Experiencia>> GetExperiencia(int id)
+        public async Task<ActionResult<IEnumerable<Experiencia>>> GetExperienciaById(int id)
         {
-            var experiencia = await _context.Experiencias.FindAsync(id);
+            var experiencia = await _context.Experiencias.Where(x => x.usuario_Id == id).ToListAsync();
 
             if (experiencia == null)
             {
@@ -83,7 +96,7 @@ namespace WebApiStudentWork.Controllers
             _context.Experiencias.Add(experiencia);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetExperiencia", new { id = experiencia.experienciaId }, experiencia);
+            return CreatedAtAction("GetExperienciaById", new { id = experiencia.experienciaId }, experiencia);
         }
 
         // DELETE: api/Experiencia/5

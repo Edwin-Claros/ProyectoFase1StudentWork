@@ -2,7 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { ConexionDBService } from "../conexion-db.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { UsuarioModel } from "../models/UsuarioModel";
-import { Router } from "@angular/router";
+import { ExperienciaModel } from "../models/ExperienciaModel";
+import { FormacionModel } from "../models/FormacionModel";
 
 @Component({
   selector: "app-user-profile",
@@ -16,14 +17,27 @@ export class UserProfileComponent implements OnInit {
   getStateUser: any = [];
   getLicencesUser: any = [];
   obtenerEmailUser: any = [];
-  FormularioGuardar: FormGroup;
-  getUser: any = [];
+
+  FormularioUser: FormGroup;
+  FormularioExperiencia: FormGroup;
+  FormularioExperienciaModal: FormGroup;
+  FormularioFormacion: FormGroup;
+  FormularioFormacionModal: FormGroup;
+
+  showFormExperiencia: boolean = false;
+  showFormFormacion: boolean = false;
+
+  getExperiencia: any;
+  getEmpresaSectorUser: any = [];
+  getNivelEstudioUser: any = [];
+  getExperienciaedit: any = [];
+  getFormacionedit: any = [];
+  getFormacion: any;
 
   constructor(
     private _service: ConexionDBService,
     private formularioB: FormBuilder
   ) {
-    console.log("creo ser tercero");
     this.tiempo();
   }
 
@@ -33,60 +47,244 @@ export class UserProfileComponent implements OnInit {
     this.getCities();
     this.getState();
     this.getLicences();
+    this.getEmpresaSector();
+    this.getNivelEstudio();
     this.obtenerEmailUser = JSON.parse(sessionStorage.getItem("user"));
-
-    this.FormularioGuardar = this.formularioB.group({
-      usuarioNombre: ["", Validators.required],
-      usuarioCorreo: ["", Validators.required],
-      usuarioDNI: [""],
-      usuarioTelefono: [""],
-      usuarioSkype: [""],
-      usuarioDireccion: [""],
-      usuarioCodigoPostal: [""],
-      usuarioEstadoCivil: ["", Validators.required],
-      usuarioVehiculoPropio: ["", Validators.required],
-      usuarioGenero: ["", Validators.required],
-      usuarioFechaNacimiento: ["", Validators.required],
-      pais_Id: ["", Validators.required],
-      paisDepartamento_Id: [""],
-      paisCiudad_Id: [""],
-      licenciaConducir_Id: ["", Validators.required],
-      usuarioDescripcion: [""],
-      usuarioFacebook: [""],
-      usuarioInstagram: [""],
-      usuarioTwitter: [""],
-      usuarioApellido: ["", Validators.required],
-    });
+    this.formularioUsuario();
+    this.formularioExperiencia();
+    this.formularioExperienciaModal();
+    this.formularioFormacion();
+    this.formularioFormacionModal();
   }
 
-  onSubmit(ModeloClase: any) {
+  onSubmitUser(ModeloClase: any) {
     const agregar = new UsuarioModel();
-
-    this.saveModel(agregar, ModeloClase);
-
-    if (this.getDatoUser == null) {
+    this.modelUser(agregar, ModeloClase);
+    if (this.getDatoUser.usuarioId == null || undefined) {
       this.addUser(agregar);
     } else {
       agregar.usuarioId = this.getDatoUser.usuarioId;
       agregar.usuarioTimestamp = this.getDatoUser.usuarioTimestamp;
+      console.log(agregar);
       this.updateUser(agregar, this.getDatoUser.usuarioId);
     }
   }
 
-  getProfileUser() {
-    this.getUser = JSON.parse(sessionStorage.getItem("userApi"));
-    if (this.getUser == null) {
-      this.getDatoUser.usuarioNombre = "";
-    } else {
-      this.getDatoUser = this.getUser;
-    }
+  onSubmitExperiencia(ModeloClase: any) {
+    const agregar = new ExperienciaModel();
+    this.modelExperiencia(agregar, ModeloClase);
+    agregar.usuario_Id = this.getDatoUser.usuarioId;
+    console.log(agregar);
+    this.addExperiencia(agregar);
+  }
+
+  onSubmitExperienciaUpdate(ModeloClase: any) {
+    const agregar = new ExperienciaModel();
+    this.modelExperienciaUpdate(agregar, ModeloClase);
+    agregar.usuario_Id = this.getDatoUser.usuarioId;
+    agregar.experienciaId = this.getExperienciaedit.experienciaId;
+    console.log(agregar);
+    this.updateExperiencia(agregar, this.getExperienciaedit.experienciaId);
+  }
+
+  onSubmitFormacion(ModeloClase: any) {
+    const agregar = new FormacionModel();
+    this.modelFormacion(agregar, ModeloClase);
+    agregar.usuario_Id = this.getDatoUser.usuarioId;
+    console.log(agregar);
+    this.addFormacion(agregar);
+  }
+
+  onSubmitFormacionUpdate(ModeloClase: any) {
+    const agregar = new FormacionModel();
+    this.modelFormacionUpdate(agregar, ModeloClase);
+    agregar.usuario_Id = this.getDatoUser.usuarioId;
+    agregar.formacionId = this.getFormacionedit.formacionId;
+    console.log(agregar);
+    this.updateFormacion(agregar, this.getFormacionedit.formacionId);
   }
 
   tiempo() {
     setTimeout(() => {
       this.getProfileUser();
+      this.getExperienciaUser();
+      this.getFormacionUser();
       console.log("ya");
-    }, 100);
+    }, 2000);
+  }
+
+  addUser(agregar) {
+    this._service.addUser(agregar).subscribe(
+      (result) => {
+        this._service.funcionExitosa(
+          "Felicidades, los datos fueron guardados con exito!"
+        );
+        this.refresh();
+      },
+      (error) => {
+        this._service.funcionError(
+          "ERROR, Los datos no pudieron ser almacenados"
+        );
+      }
+    );
+  }
+
+  addExperiencia(agregar) {
+    this._service.addExperiencia(agregar).subscribe(
+      (result) => {
+        this._service.funcionExitosa(
+          "Felicidades, los datos fueron guardados con exito!"
+        );
+        setTimeout(() => {
+          this.refresh();
+        }, 400);
+      },
+      (error) => {
+        this._service.funcionError(
+          "ERROR, Los datos no pudieron ser almacenados"
+        );
+        console.log(JSON.stringify(error));
+      }
+    );
+  }
+
+  addFormacion(agregar) {
+    this._service.addFormacion(agregar).subscribe(
+      (result) => {
+        this._service.funcionExitosa(
+          "Felicidades, los datos fueron guardados con exito!"
+        );
+        setTimeout(() => {
+          this.refresh();
+        }, 400);
+      },
+      (error) => {
+        this._service.funcionError(
+          "ERROR, Los datos no pudieron ser almacenados"
+        );
+        console.log(JSON.stringify(error));
+      }
+    );
+  }
+
+  deleteExperiencia(id) {
+    this._service.deleteExperiencia(id).subscribe(
+      (result) => {
+        this._service.funcionExitosa(
+          "Felicidades, los datos fueron eliminados con exito!"
+        );
+        setTimeout(() => {
+          this.refresh();
+        }, 400);
+      },
+      (error) => {
+        this._service.funcionError(
+          "ERROR, Los datos no pudieron ser eliminados"
+        );
+        console.log(JSON.stringify(error));
+      }
+    );
+  }
+
+  deleteFormacion(id) {
+    this._service.deleteFormacion(id).subscribe(
+      (result) => {
+        this._service.funcionExitosa(
+          "Felicidades, los datos fueron eliminados con exito!"
+        );
+        setTimeout(() => {
+          this.refresh();
+        }, 400);
+      },
+      (error) => {
+        this._service.funcionError(
+          "ERROR, Los datos no pudieron ser eliminados"
+        );
+        console.log(JSON.stringify(error));
+      }
+    );
+  }
+
+  updateExperiencia(agregar, id) {
+    this._service.updateExperiencia(agregar, id).subscribe(
+      (result) => {
+        this._service.funcionExitosa(
+          "Felicidades, los datos fueron actualizados con exito!"
+        );
+        setTimeout(() => {
+          this.refresh();
+        }, 400);
+      },
+      (error) => {
+        this._service.funcionError(
+          "ERROR, Los datos no pudieron ser actualizados"
+        );
+      }
+    );
+  }
+
+  updateUser(agregar, id) {
+    this._service.updateUser(agregar, id).subscribe(
+      (result) => {
+        this._service.funcionExitosa(
+          "Felicidades, los datos fueron actualizados con exito!"
+        );
+        setTimeout(() => {
+          this.refresh();
+        }, 400);
+      },
+      (error) => {
+        this._service.funcionError(
+          "ERROR, Los datos no pudieron ser actualizados"
+        );
+      }
+    );
+  }
+
+  updateFormacion(agregar, id) {
+    this._service.updateFormacion(agregar, id).subscribe(
+      (result) => {
+        this._service.funcionExitosa(
+          "Felicidades, los datos fueron actualizados con exito!"
+        );
+        setTimeout(() => {
+          this.refresh();
+        }, 400);
+      },
+      (error) => {
+        this._service.funcionError(
+          "ERROR, Los datos no pudieron ser actualizados"
+        );
+        console.log(this.getNivelEstudioUser);
+      }
+    );
+  }
+
+  getProfileUser() {
+    var getUser = JSON.parse(sessionStorage.getItem("userApi"));
+    if (getUser == null) {
+      this.getDatoUser.usuarioNombre = [];
+    } else {
+      this.getDatoUser = getUser;
+    }
+  }
+
+  getExperienciaUser() {
+    var getExperiencia = JSON.parse(sessionStorage.getItem("expApi"));
+    if (getExperiencia == null) {
+      this.getExperiencia = [];
+    } else {
+      this.getExperiencia = getExperiencia;
+    }
+  }
+
+  getFormacionUser() {
+    var getFormacion = JSON.parse(sessionStorage.getItem("formacionApi"));
+    if (getFormacion == null) {
+      this.getFormacion = [];
+    } else {
+      this.getFormacion = getFormacion;
+    }
   }
 
   getCountries() {
@@ -137,19 +335,130 @@ export class UserProfileComponent implements OnInit {
     );
   }
 
-  goFacebook() {
-    window.location.href = this.getDatoUser.usuarioFacebook;
+  getEmpresaSector() {
+    this._service.getEmpresaSector().subscribe(
+      (result) => {
+        this.getEmpresaSectorUser = result;
+      },
+      (error) => {
+        console.log(JSON.stringify(error));
+        this._service.funcionError("No se pudieron obtener las Licencias");
+      }
+    );
   }
 
-  goTwitter() {
-    window.location.href = this.getDatoUser.usuarioTwitter;
+  getNivelEstudio() {
+    this._service.getNivelEstudio().subscribe(
+      (result) => {
+        this.getNivelEstudioUser = result;
+      },
+      (error) => {
+        console.log(JSON.stringify(error));
+        this._service.funcionError("No se pudieron obtener las Licencias");
+      }
+    );
   }
 
-  goInstagram() {
-    window.location.href = this.getDatoUser.usuarioInstagram;
+  refresh() {
+    window.location.reload();
   }
 
-  saveModel(agregar: any, ModeloClase: any) {
+  editExperiencia(item) {
+    this.getExperienciaedit = item;
+    console.log(item);
+  }
+
+  editFormacion(item) {
+    this.getFormacionedit = item;
+    console.log(item);
+  }
+
+  formularioExperiencia() {
+    this.FormularioExperiencia = this.formularioB.group({
+      experienciaEmpresa: ["", Validators.required],
+      experienciaDestacar: [""],
+      experienciaMejorar: [""],
+      experienciaCargo: ["", Validators.required],
+      experienciaArea: ["", Validators.required],
+      experienciaFuncionesYLogros: [""],
+      experienciaFechaInicio: ["", Validators.required],
+      experienciaFechaFinal: ["", Validators.required],
+      experienciaRecomendacion: ["", Validators.required],
+      empresaSector_Id: ["", Validators.required],
+    });
+  }
+
+  formularioExperienciaModal() {
+    this.FormularioExperienciaModal = this.formularioB.group({
+      experienciaEmpresaModal: ["", Validators.required],
+      experienciaDestacarModal: [""],
+      experienciaMejorarModal: [""],
+      experienciaCargoModal: ["", Validators.required],
+      experienciaAreaModal: ["", Validators.required],
+      experienciaFuncionesYLogrosModal: [""],
+      experienciaFechaInicioModal: ["", Validators.required],
+      experienciaFechaFinalModal: ["", Validators.required],
+      experienciaRecomendacionModal: ["", Validators.required],
+      empresaSector_IdModal: ["", Validators.required],
+    });
+  }
+
+  formularioFormacion() {
+    this.FormularioFormacion = this.formularioB.group({
+      formacionCentroEducativo: ["", Validators.required],
+      formacionAreaDeEstudio: ["", Validators.required],
+      formacionNivelProfesorado: [""],
+      formacionSatisfaccionprendizaje: [""],
+      formacionAccesoAEmpleo: [""],
+      formacionRecomendacion: ["", Validators.required],
+      formacionEstado: ["", Validators.required],
+      formacionFechaInicio: ["", Validators.required],
+      formacionFechaFinal: ["", Validators.required],
+      nivelEstudio_Id: ["", Validators.required],
+    });
+  }
+
+  formularioFormacionModal() {
+    this.FormularioFormacionModal = this.formularioB.group({
+      formacionCentroEducativoModal: ["", Validators.required],
+      formacionAreaDeEstudioModal: ["", Validators.required],
+      formacionNivelProfesoradoModal: [""],
+      formacionSatisfaccionprendizajeModal: [""],
+      formacionAccesoAEmpleoModal: [""],
+      formacionRecomendacionModal: ["", Validators.required],
+      formacionEstadoModal: ["", Validators.required],
+      formacionFechaInicioModal: ["", Validators.required],
+      formacionFechaFinalModal: ["", Validators.required],
+      nivelEstudio_IdModal: ["", Validators.required],
+    });
+  }
+
+  formularioUsuario() {
+    this.FormularioUser = this.formularioB.group({
+      usuarioNombre: ["", Validators.required],
+      usuarioCorreo: ["", Validators.required],
+      usuarioDNI: [""],
+      usuarioTelefono: [""],
+      usuarioSkype: [""],
+      usuarioDireccion: [""],
+      usuarioCodigoPostal: [""],
+      usuarioEstadoCivil: ["", Validators.required],
+      usuarioVehiculoPropio: ["", Validators.required],
+      usuarioGenero: ["", Validators.required],
+      usuarioFechaNacimiento: ["", Validators.required],
+      pais_Id: ["", Validators.required],
+      paisDepartamento_Id: [""],
+      paisCiudad_Id: [""],
+      licenciaConducir_Id: ["", Validators.required],
+      usuarioDescripcion: [""],
+      usuarioFacebook: [""],
+      usuarioInstagram: [""],
+      usuarioTwitter: [""],
+      usuarioApellido: ["", Validators.required],
+    });
+  }
+
+  modelUser(agregar, ModeloClase) {
     agregar.usuarioNombre = ModeloClase.usuarioNombre;
     agregar.usuarioCorreo = ModeloClase.usuarioCorreo;
     agregar.usuarioDNI = ModeloClase.usuarioDNI;
@@ -172,41 +481,74 @@ export class UserProfileComponent implements OnInit {
     agregar.usuarioApellido = ModeloClase.usuarioApellido;
   }
 
-  addUser(agregar: any) {
-    this._service.addUser(agregar).subscribe(
-      (result) => {
-        this._service.funcionExitosa(
-          "Felicidades, los datos fueron guardados con exito!"
-        );
-        this.refresh();
-      },
-      (error) => {
-        this._service.funcionError(
-          "ERROR, Los datos no pudieron ser almacenados"
-        );
-      }
-    );
+  modelExperiencia(agregar, ModeloClase) {
+    agregar.experienciaEmpresa = ModeloClase.experienciaEmpresa;
+    agregar.experienciaDestacar = ModeloClase.experienciaDestacar;
+    agregar.experienciaMejorar = ModeloClase.experienciaMejorar;
+    agregar.experienciaCargo = ModeloClase.experienciaCargo;
+    agregar.experienciaArea = ModeloClase.experienciaArea;
+    agregar.experienciaFuncionesYLogros =
+      ModeloClase.experienciaFuncionesYLogros;
+    agregar.experienciaFechaInicio = ModeloClase.experienciaFechaInicio;
+    agregar.experienciaFechaFinal = ModeloClase.experienciaFechaFinal;
+    agregar.experienciaRecomendacion = ModeloClase.experienciaRecomendacion;
+    agregar.empresaSector_Id = ModeloClase.empresaSector_Id;
   }
 
-  updateUser(agregar: any, id: string) {
-    this._service.updateUser(agregar, id).subscribe(
-      (result) => {
-        this._service.funcionExitosa(
-          "Felicidades, los datos fueron actualizados con exito!"
-        );
-        setTimeout(() => {
-          this.refresh();
-        }, 400);
-      },
-      (error) => {
-        this._service.funcionError(
-          "ERROR, Los datos no pudieron ser actualizados"
-        );
-      }
-    );
+  modelExperienciaUpdate(agregar, ModeloClase) {
+    agregar.experienciaEmpresa = ModeloClase.experienciaEmpresaModal;
+    agregar.experienciaDestacar = ModeloClase.experienciaDestacarModal;
+    agregar.experienciaMejorar = ModeloClase.experienciaMejorarModal;
+    agregar.experienciaCargo = ModeloClase.experienciaCargoModal;
+    agregar.experienciaArea = ModeloClase.experienciaAreaModal;
+    agregar.experienciaFuncionesYLogros =
+      ModeloClase.experienciaFuncionesYLogrosModal;
+    agregar.experienciaFechaInicio = ModeloClase.experienciaFechaInicioModal;
+    agregar.experienciaFechaFinal = ModeloClase.experienciaFechaFinalModal;
+    agregar.experienciaRecomendacion =
+      ModeloClase.experienciaRecomendacionModal;
+    agregar.empresaSector_Id = ModeloClase.empresaSector_IdModal;
   }
 
-  refresh() {
-    window.location.reload();
+  modelFormacion(agregar, ModeloClase) {
+    agregar.formacionCentroEducativo = ModeloClase.formacionCentroEducativo;
+    agregar.formacionAreaDeEstudio = ModeloClase.formacionAreaDeEstudio;
+    agregar.formacionNivelProfesorado = ModeloClase.formacionNivelProfesorado;
+    agregar.formacionSatisfaccionprendizaje =
+      ModeloClase.formacionSatisfaccionprendizaje;
+    agregar.formacionAccesoAEmpleo = ModeloClase.formacionAccesoAEmpleo;
+    agregar.formacionRecomendacion = ModeloClase.formacionRecomendacion;
+    agregar.formacionEstado = ModeloClase.formacionEstado;
+    agregar.formacionFechaInicio = ModeloClase.formacionFechaInicio;
+    agregar.formacionFechaFinal = ModeloClase.formacionFechaFinal;
+    agregar.nivelEstudio_Id = ModeloClase.nivelEstudio_Id;
+  }
+
+  modelFormacionUpdate(agregar, ModeloClase) {
+    agregar.formacionCentroEducativo =
+      ModeloClase.formacionCentroEducativoModal;
+    agregar.formacionAreaDeEstudio = ModeloClase.formacionAreaDeEstudioModal;
+    agregar.formacionNivelProfesorado =
+      ModeloClase.formacionNivelProfesoradoModal;
+    agregar.formacionSatisfaccionprendizaje =
+      ModeloClase.formacionSatisfaccionprendizajeModal;
+    agregar.formacionAccesoAEmpleo = ModeloClase.formacionAccesoAEmpleoModal;
+    agregar.formacionRecomendacion = ModeloClase.formacionRecomendacionModal;
+    agregar.formacionEstado = ModeloClase.formacionEstadoModal;
+    agregar.formacionFechaInicio = ModeloClase.formacionFechaInicioModal;
+    agregar.formacionFechaFinal = ModeloClase.formacionFechaFinalModal;
+    agregar.nivelEstudio_Id = ModeloClase.nivelEstudio_IdModal;
+  }
+
+  goFacebook() {
+    window.location.href = this.getDatoUser.usuarioFacebook;
+  }
+
+  goTwitter() {
+    window.location.href = this.getDatoUser.usuarioTwitter;
+  }
+
+  goInstagram() {
+    window.location.href = this.getDatoUser.usuarioInstagram;
   }
 }

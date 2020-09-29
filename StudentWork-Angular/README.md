@@ -13,7 +13,7 @@
 Within the download you'll find the following directories and files:
 
 ```
-Now Ui Dashboard
+StudentWork
 ├── CHANGELOG.md
 ├── LICENSE.md
 ├── README.md

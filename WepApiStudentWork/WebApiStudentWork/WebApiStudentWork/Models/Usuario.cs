@@ -45,6 +45,8 @@ namespace WebApiStudentWork.Models
         public LicenciaConducir LicenciaConducir { get; set; }
 
         public List<Experiencia> Experiencias { get; set; }
+        public List<Formacion> Formaciones { get; set; }
+        public List<UsuarioIdioma> UsuarioIdiomas { get; set; }
     }
 
     public class UsuarioMap : IEntityTypeConfiguration<Usuario>
@@ -76,7 +78,6 @@ namespace WebApiStudentWork.Models
             builder.HasOne(e => e.PaisDepartamento).WithMany(e => e.Usuarios).HasForeignKey(e => e.paisDepartamento_Id).OnDelete(DeleteBehavior.Cascade);
             builder.HasOne(e => e.PaisCiudad).WithMany(e => e.Usuarios).HasForeignKey(e => e.paisCiudad_Id).OnDelete(DeleteBehavior.Cascade);
             builder.HasOne(e => e.LicenciaConducir).WithMany(e => e.Usuarios).HasForeignKey(e => e.licenciaConducir_Id).OnDelete(DeleteBehavior.Cascade);
-
         }
     }
 
