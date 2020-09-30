@@ -28,24 +28,24 @@ namespace WebApiStudentWork.Controllers
             return await _context.UsuarioIdiomas.ToListAsync();
         }
 
-        // GET: api/UsuarioIdioma/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<UsuarioIdioma>> GetUsuarioIdioma(int id)
-        {
-            var usuarioIdioma = await _context.UsuarioIdiomas.FindAsync(id);
+        //// GET: api/UsuarioIdioma/5
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<UsuarioIdioma>> GetUsuarioIdioma(int id)
+        //{
+        //    var usuarioIdioma = await _context.UsuarioIdiomas.FindAsync(id);
 
-            if (usuarioIdioma == null)
-            {
-                return NotFound();
-            }
+        //    if (usuarioIdioma == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return usuarioIdioma;
-        }
+        //    return usuarioIdioma;
+        //}
 
         [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<UsuarioIdioma>>> GetUsuarioIdiomaById(int id)
         {
-            var usuarioIdioma = await _context.UsuarioIdiomas.Where(x => x.usuario_Id == id).ToListAsync();
+            var usuarioIdioma = await _context.UsuarioIdiomas.Include(y => y.Idioma).Where(x => x.usuario_Id == id).ToListAsync();
 
             if (usuarioIdioma == null)
             {

@@ -4,6 +4,10 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { UsuarioModel } from "../models/UsuarioModel";
 import { ExperienciaModel } from "../models/ExperienciaModel";
 import { FormacionModel } from "../models/FormacionModel";
+import { UserIdiomaModel } from "../models/UserIdiomaModel";
+import { ConocimientoModel } from "../models/ConocimientoModel";
+import { PreferenciasDeTrabajoModel } from "../models/PreferenciasDeTrabajoModel";
+import { UsuarioImagenModel } from "../models/UsuarioImagenModel";
 
 @Component({
   selector: "app-user-profile",
@@ -17,22 +21,34 @@ export class UserProfileComponent implements OnInit {
   getStateUser: any = [];
   getLicencesUser: any = [];
   obtenerEmailUser: any = [];
+  getIdiomaUser: any = [];
 
   FormularioUser: FormGroup;
   FormularioExperiencia: FormGroup;
   FormularioExperienciaModal: FormGroup;
   FormularioFormacion: FormGroup;
   FormularioFormacionModal: FormGroup;
+  FormularioUserIdioma: FormGroup;
+  FormularioConocimiento: FormGroup;
+  FormularioPreferenciasDeTrabajo: FormGroup;
 
   showFormExperiencia: boolean = false;
   showFormFormacion: boolean = false;
+  showFormIdioma: boolean = false;
+  showFormConocimiento: boolean = false;
 
-  getExperiencia: any;
+  getExperiencia: any = [];
   getEmpresaSectorUser: any = [];
   getNivelEstudioUser: any = [];
   getExperienciaedit: any = [];
   getFormacionedit: any = [];
-  getFormacion: any;
+  getFormacion: any = [];
+  getDatoIdioma: any = [];
+  getDatoConocimiento: any = [];
+  getDatoPreferenciasDeTrabajo: any = [];
+  getSituacionActualUser: any = [];
+  getImagenUser: any = [];
+  archivoImagen: UsuarioImagenModel;
 
   constructor(
     private _service: ConexionDBService,
@@ -44,8 +60,11 @@ export class UserProfileComponent implements OnInit {
   ngOnInit() {
     console.log("creo ser cuarto");
     this.getCountries();
+    this.getSituacionActual();
     this.getCities();
     this.getState();
+    this.getIdioma();
+    this.getUserImagen();
     this.getLicences();
     this.getEmpresaSector();
     this.getNivelEstudio();
@@ -55,6 +74,13 @@ export class UserProfileComponent implements OnInit {
     this.formularioExperienciaModal();
     this.formularioFormacion();
     this.formularioFormacionModal();
+    this.formularioUserIdioma();
+    this.formularioConocimiento();
+    this.formularioPreferenciasDeTrabajo();
+  }
+
+  prueba(){
+    var banner = document.getElementById('prueba');
   }
 
   onSubmitUser(ModeloClase: any) {
@@ -76,6 +102,14 @@ export class UserProfileComponent implements OnInit {
     agregar.usuario_Id = this.getDatoUser.usuarioId;
     console.log(agregar);
     this.addExperiencia(agregar);
+  }
+
+  onSubmitUserIdioma(ModeloClase: any) {
+    const agregar = new UserIdiomaModel();
+    this.modelUserIdioma(agregar, ModeloClase);
+    agregar.usuario_Id = this.getDatoUser.usuarioId;
+    console.log(agregar);
+    this.addUserIdioma(agregar);
   }
 
   onSubmitExperienciaUpdate(ModeloClase: any) {
@@ -104,17 +138,233 @@ export class UserProfileComponent implements OnInit {
     this.updateFormacion(agregar, this.getFormacionedit.formacionId);
   }
 
+  onSubmitConocimiento(ModeloClase: any) {
+    const agregar = new ConocimientoModel();
+    this.modelConocimiento(agregar, ModeloClase);
+    agregar.usuario_Id = this.getDatoUser.usuarioId;
+    console.log(agregar);
+    this.addConocimiento(agregar);
+  }
+
+  onSubmitPreferenciasDeTrabajo(ModeloClase: any) {
+    const agregar = new PreferenciasDeTrabajoModel();
+    this.modelPreferenciasDeTrabajo(agregar, ModeloClase);
+    if (
+      this.getDatoPreferenciasDeTrabajo.preferenciasDeTrabajoId == null ||
+      undefined
+    ) {
+      agregar.usuario_Id = this.getDatoUser.usuarioId;
+      console.log(agregar);
+      this.addPreferenciasDeTrabajo(agregar);
+    } else {
+      agregar.usuario_Id = this.getDatoUser.usuarioId;
+      agregar.preferenciasDeTrabajoId = this.getDatoPreferenciasDeTrabajo.preferenciasDeTrabajoId;
+      console.log(agregar);
+      this.updatePreferenciasDeTrabajo(
+        agregar,
+        this.getDatoPreferenciasDeTrabajo.preferenciasDeTrabajoId
+      );
+    }
+  }
+
   tiempo() {
     setTimeout(() => {
       this.getProfileUser();
       this.getExperienciaUser();
       this.getFormacionUser();
+      this.getDatoIdiomaUser();
+      this.getConocimiento();
+      this.getPreferenciasDeTrabajo();
       console.log("ya");
     }, 2000);
   }
 
+
+
+
+  getUserImagen() {
+    this._service.getDatoUserImagen().subscribe(
+      (result) => {
+        this.getImagenUser = result;
+      },
+      (error) => {
+        this._service.funcionError("No se pudieron obtener la imagen del usuario");
+        console.log(JSON.stringify(error));
+      }
+    );
+  }
+
+  addUserImagen(agregar) {
+    this._service.addUserImagen(this.archivoImagen).subscribe(
+      (result) => {
+        this._service.funcionExitosa(
+          "Felicidades, los datos fueron guardados con exito!"
+        );
+        //this.refresh();
+      },
+      (error) => {
+        this._service.funcionError(
+          "ERROR, Los datos no pudieron ser almacenados"
+        );
+        console.log(JSON.stringify(error));
+      }
+    );
+  }
+
+  fileEvent(fileInput: Event){
+    let file = (<HTMLInputElement>fileInput.target).files[0];
+
+    if (file.type == "image/jpeg" || file.type == "image/png") {
+      this.archivoImagen = new UsuarioImagenModel();
+      this.archivoImagen.usuarioImagenImagen = file.name;
+      this.archivoImagen.usuario_Id = this.getDatoUser.usuarioId;
+      this.archivoImagen.usuarioImagenType = file.type;
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  addPreferenciasDeTrabajo(agregar) {
+    this._service.addPreferenciasDeTrabajo(agregar).subscribe(
+      (result) => {
+        this._service.funcionExitosa(
+          "Felicidades, los datos fueron guardados con exito!"
+        );
+        this.refresh();
+      },
+      (error) => {
+        this._service.funcionError(
+          "ERROR, Los datos no pudieron ser almacenados"
+        );
+        console.log(JSON.stringify(error));
+      }
+    );
+  }
+
+  updatePreferenciasDeTrabajo(agregar, id) {
+    this._service.updatePreferenciasDeTrabajo(agregar, id).subscribe(
+      (result) => {
+        this._service.funcionExitosa(
+          "Felicidades, los datos fueron actualizados con exito!"
+        );
+        setTimeout(() => {
+          this.refresh();
+        }, 400);
+      },
+      (error) => {
+        this._service.funcionError(
+          "ERROR, Los datos no pudieron ser actualizados"
+        );
+        console.log(JSON.stringify(error));
+      }
+    );
+  }
+
+  getPreferenciasDeTrabajo() {
+    var getPreferenciasDeTrabajo = JSON.parse(
+      sessionStorage.getItem("userPreferenciasApi")
+    );
+    if (getPreferenciasDeTrabajo == null) {
+      this.getDatoPreferenciasDeTrabajo.preferenciasDeTrabajoPuesto = [];
+    } else {
+      this.getDatoPreferenciasDeTrabajo = getPreferenciasDeTrabajo;
+    }
+  }
+
+  getSituacionActual() {
+    this._service.getSituacionActual().subscribe(
+      (result) => {
+        this.getSituacionActualUser = result;
+      },
+      (error) => {
+        this._service.funcionError("No se pudieron obtener los Paises");
+        console.log(JSON.stringify(error));
+      }
+    );
+  }
+
+  addConocimiento(agregar) {
+    this._service.addConocimiento(agregar).subscribe(
+      (result) => {
+        this._service.funcionExitosa(
+          "Felicidades, los datos fueron guardados con exito!"
+        );
+        this._service.addDatoConocimientoStorage();
+        this.tiempo();
+      },
+      (error) => {
+        this._service.funcionError(
+          "ERROR, Los datos no pudieron ser almacenados"
+        );
+      }
+    );
+  }
+
+  deleteConocimiento(id) {
+    this._service.deleteConocimiento(id).subscribe(
+      (result) => {
+        this._service.funcionExitosa(
+          "Felicidades, los datos fueron eliminados con exito!"
+        );
+        this._service.addDatoConocimientoStorage();
+        this.tiempo();
+      },
+      (error) => {
+        this._service.funcionError(
+          "ERROR, Los datos no pudieron ser eliminados"
+        );
+        console.log(JSON.stringify(error));
+      }
+    );
+  }
+
+  getConocimiento() {
+    var getConocimiento = JSON.parse(sessionStorage.getItem("conocimientoApi"));
+    if (getConocimiento == null) {
+      this.getDatoConocimiento.conocimientoNombre = [];
+    } else {
+      this.getDatoConocimiento = getConocimiento;
+    }
+  }
+
   addUser(agregar) {
     this._service.addUser(agregar).subscribe(
+      (result) => {
+        this._service.funcionExitosa(
+          "Felicidades, los datos fueron guardados con exito!"
+        );
+        this.refresh();
+      },
+      (error) => {
+        this._service.funcionError(
+          "ERROR, Los datos no pudieron ser almacenados"
+        );
+      }
+    );
+  }
+
+  addUserIdioma(agregar) {
+    this._service.addUserIdioma(agregar).subscribe(
       (result) => {
         this._service.funcionExitosa(
           "Felicidades, los datos fueron guardados con exito!"
@@ -188,6 +438,25 @@ export class UserProfileComponent implements OnInit {
 
   deleteFormacion(id) {
     this._service.deleteFormacion(id).subscribe(
+      (result) => {
+        this._service.funcionExitosa(
+          "Felicidades, los datos fueron eliminados con exito!"
+        );
+        setTimeout(() => {
+          this.refresh();
+        }, 400);
+      },
+      (error) => {
+        this._service.funcionError(
+          "ERROR, Los datos no pudieron ser eliminados"
+        );
+        console.log(JSON.stringify(error));
+      }
+    );
+  }
+
+  deleteIdioma(id) {
+    this._service.deleteIdioma(id).subscribe(
       (result) => {
         this._service.funcionExitosa(
           "Felicidades, los datos fueron eliminados con exito!"
@@ -287,6 +556,27 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
+  getDatoIdiomaUser() {
+    var getDatoIdioma = JSON.parse(sessionStorage.getItem("userIdiomaApi"));
+    if (getDatoIdioma == null) {
+      this.getDatoIdioma = [];
+    } else {
+      this.getDatoIdioma = getDatoIdioma;
+    }
+  }
+
+  getIdioma() {
+    this._service.getIdioma().subscribe(
+      (result) => {
+        this.getIdiomaUser = result;
+      },
+      (error) => {
+        this._service.funcionError("No se pudieron obtener los Idiomas");
+        console.log(JSON.stringify(error));
+      }
+    );
+  }
+
   getCountries() {
     this._service.getCountries().subscribe(
       (result) => {
@@ -342,7 +632,7 @@ export class UserProfileComponent implements OnInit {
       },
       (error) => {
         console.log(JSON.stringify(error));
-        this._service.funcionError("No se pudieron obtener las Licencias");
+        this._service.funcionError("No se pudieron obtener las sectores de empresas");
       }
     );
   }
@@ -354,7 +644,7 @@ export class UserProfileComponent implements OnInit {
       },
       (error) => {
         console.log(JSON.stringify(error));
-        this._service.funcionError("No se pudieron obtener las Licencias");
+        this._service.funcionError("No se pudieron obtener los listados de nivel de estudio");
       }
     );
   }
@@ -385,6 +675,19 @@ export class UserProfileComponent implements OnInit {
       experienciaFechaFinal: ["", Validators.required],
       experienciaRecomendacion: ["", Validators.required],
       empresaSector_Id: ["", Validators.required],
+    });
+  }
+
+  formularioUserIdioma() {
+    this.FormularioUserIdioma = this.formularioB.group({
+      usuarioIdiomaNivel: ["", Validators.required],
+      idioma_Id: ["", Validators.required],
+    });
+  }
+
+  formularioConocimiento() {
+    this.FormularioConocimiento = this.formularioB.group({
+      conocimientoNombre: ["", Validators.required],
     });
   }
 
@@ -433,6 +736,18 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
+  formularioPreferenciasDeTrabajo() {
+    this.FormularioPreferenciasDeTrabajo = this.formularioB.group({
+      preferenciasDeTrabajoPuesto: ["", Validators.required],
+      preferenciasDeTrabajoSalario: ["", Validators.required],
+      preferenciasDeTrabajoArea: ["", Validators.required],
+      preferenciasDeTrabajoViajar: ["", Validators.required],
+      preferenciasDeTrabajoResidencia: ["", Validators.required],
+      paisDepartamento_Id: ["", Validators.required],
+      situacionActual_Id: ["", Validators.required],
+    });
+  }
+
   formularioUsuario() {
     this.FormularioUser = this.formularioB.group({
       usuarioNombre: ["", Validators.required],
@@ -456,6 +771,19 @@ export class UserProfileComponent implements OnInit {
       usuarioTwitter: [""],
       usuarioApellido: ["", Validators.required],
     });
+  }
+
+  modelUserIdioma(agregar, ModeloClase) {
+    agregar.usuarioIdiomaNivel = ModeloClase.usuarioIdiomaNivel;
+    agregar.idioma_Id = ModeloClase.idioma_Id;
+  }
+
+  modelConocimiento(agregar, ModeloClase) {
+    agregar.conocimientoNombre = ModeloClase.conocimientoNombre;
+  }
+
+  modelUserImagen(agregar, ModeloClase) {
+    agregar.userImagenImagem = ModeloClase.userImagenImagem;
   }
 
   modelUser(agregar, ModeloClase) {
@@ -493,6 +821,20 @@ export class UserProfileComponent implements OnInit {
     agregar.experienciaFechaFinal = ModeloClase.experienciaFechaFinal;
     agregar.experienciaRecomendacion = ModeloClase.experienciaRecomendacion;
     agregar.empresaSector_Id = ModeloClase.empresaSector_Id;
+  }
+
+  modelPreferenciasDeTrabajo(agregar, ModeloClase) {
+    agregar.preferenciasDeTrabajoPuesto =
+      ModeloClase.preferenciasDeTrabajoPuesto;
+    agregar.preferenciasDeTrabajoSalario =
+      ModeloClase.preferenciasDeTrabajoSalario;
+    agregar.preferenciasDeTrabajoArea = ModeloClase.preferenciasDeTrabajoArea;
+    agregar.preferenciasDeTrabajoViajar =
+      ModeloClase.preferenciasDeTrabajoViajar;
+    agregar.preferenciasDeTrabajoResidencia =
+      ModeloClase.preferenciasDeTrabajoResidencia;
+    agregar.paisDepartamento_Id = ModeloClase.paisDepartamento_Id;
+    agregar.situacionActual_Id = ModeloClase.situacionActual_Id;
   }
 
   modelExperienciaUpdate(agregar, ModeloClase) {
@@ -550,5 +892,6 @@ export class UserProfileComponent implements OnInit {
 
   goInstagram() {
     window.location.href = this.getDatoUser.usuarioInstagram;
+    var c = document.getElementById
   }
 }

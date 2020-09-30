@@ -21,4 +21,5 @@ export class UsuarioModel {
   usuarioTwitter: string;
   usuarioApellido: string;
   usuarioTimestamp: string;
+  usuarioImagen:string;
 }

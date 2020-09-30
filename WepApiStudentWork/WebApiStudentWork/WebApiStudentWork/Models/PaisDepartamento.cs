@@ -21,6 +21,7 @@ namespace WebApiStudentWork.Models
 
         public List<Usuario> Usuarios { get; set; }
         public List<PaisCiudad> PaisCiudades { get; set; }
+        public List<PreferenciasDeTrabajo> PreferenciasDeTrabajos { get; set; }
     }
     public class PaisDepartamentoMap : IEntityTypeConfiguration<PaisDepartamento>
     {

@@ -25,6 +25,9 @@ export class ConexionDBService {
     this.firebaseAuth.authState.subscribe((user) => {
       this.addDatoExperienciaStorage();
       this.addDatoFormacionStorage();
+      this.addDatoUserIdiomaStorage();
+      this.addDatoConocimientoStorage();
+      this.addDatoPreferenciasDeTrabajoStorage();
       if (user) {
         sessionStorage.setItem("user", JSON.stringify(user));
         console.log("creo ser primero");
@@ -98,6 +101,42 @@ export class ConexionDBService {
     this.router.navigate(["dashboard"]);
   }
 
+  getDatoUserImagen(): Observable<any> {
+    var userApi = JSON.parse(sessionStorage.getItem("userApi"));
+
+    if (userApi == null) {
+      return null;
+    }
+
+    return this.http.get(
+      `${environment.servidor}/api/UsuarioImagen/${userApi.usuarioId}`
+    );
+  }
+
+  getDatoPreferenciasDeTrabajo(): Observable<any> {
+    var userApi = JSON.parse(sessionStorage.getItem("userApi"));
+
+    if (userApi == null) {
+      return null;
+    }
+
+    return this.http.get(
+      `${environment.servidor}/api/PreferenciasDeTrabajo/${userApi.usuarioId}`
+    );
+  }
+
+  getDatoConocimiento(): Observable<any> {
+    var userApi = JSON.parse(sessionStorage.getItem("userApi"));
+
+    if (userApi == null) {
+      return null;
+    }
+
+    return this.http.get(
+      `${environment.servidor}/api/Conocimiento/${userApi.usuarioId}`
+    );
+  }
+
   getDatoUser(): Observable<any> {
     var user = JSON.parse(sessionStorage.getItem("user"));
 
@@ -132,15 +171,28 @@ export class ConexionDBService {
     );
   }
 
-  deleteExperiencia(id): Observable<any> {
-    return this.http.delete(`${environment.servidor}/api/Experiencia/${id}`);
+  getIdioma(): Observable<any> {
+    return this.http.get(`${environment.servidor}/api/Idioma`);
   }
-  deleteFormacion(id): Observable<any> {
-    return this.http.delete(`${environment.servidor}/api/Formacion/${id}`);
+
+  getDatoUserIdioma(): Observable<any> {
+    var userApi = JSON.parse(sessionStorage.getItem("userApi"));
+
+    if (userApi == null) {
+      return null;
+    }
+
+    return this.http.get(
+      `${environment.servidor}/api/UsuarioIdioma/${userApi.usuarioId}`
+    );
   }
 
   getCountries(): Observable<any> {
     return this.http.get(`${environment.servidor}/api/Pais`);
+  }
+
+  getSituacionActual(): Observable<any> {
+    return this.http.get(`${environment.servidor}/api/SituacionActual`);
   }
 
   getCities(): Observable<any> {
@@ -161,6 +213,54 @@ export class ConexionDBService {
 
   getNivelEstudio(): Observable<any> {
     return this.http.get(`${environment.servidor}/api/NivelEstudio`);
+  }
+
+  addDatoPreferenciasDeTrabajoStorage() {
+    if (this.getDatoPreferenciasDeTrabajo() == null) {
+      sessionStorage.setItem("userPreferenciasApi", null);
+    } else {
+      this.getDatoPreferenciasDeTrabajo().subscribe(
+        (result) => {
+          sessionStorage.setItem("userPreferenciasApi", JSON.stringify(result));
+        },
+        (error) => {
+          sessionStorage.setItem("userPreferenciasApi", null);
+          console.log(JSON.stringify(error));
+        }
+      );
+    }
+  }
+
+  addDatoConocimientoStorage() {
+    if (this.getDatoConocimiento() == null) {
+      sessionStorage.setItem("conocimientoApi", null);
+    } else {
+      this.getDatoConocimiento().subscribe(
+        (result) => {
+          sessionStorage.setItem("conocimientoApi", JSON.stringify(result));
+        },
+        (error) => {
+          sessionStorage.setItem("conocimientoApi", null);
+          console.log(JSON.stringify(error));
+        }
+      );
+    }
+  }
+
+  addDatoUserIdiomaStorage() {
+    if (this.getDatoUserIdioma() == null) {
+      sessionStorage.setItem("userIdiomaApi", null);
+    } else {
+      this.getDatoUserIdioma().subscribe(
+        (result) => {
+          sessionStorage.setItem("userIdiomaApi", JSON.stringify(result));
+        },
+        (error) => {
+          sessionStorage.setItem("userIdiomaApi", null);
+          console.log(JSON.stringify(error));
+        }
+      );
+    }
   }
 
   addDatoUserStorage() {
@@ -198,6 +298,7 @@ export class ConexionDBService {
   addDatoFormacionStorage() {
     if (this.getDatoFormacion() == null) {
       sessionStorage.setItem("formacionApi", null);
+      console.log("Hola Estoy Aqui");
     } else {
       this.getDatoFormacion().subscribe(
         (result) => {
@@ -209,6 +310,42 @@ export class ConexionDBService {
         }
       );
     }
+  }
+
+  addUserImagen(imagen) {
+    let json = JSON.stringify(imagen);
+    let headers = new HttpHeaders().set("content-Type", "application/json");
+    return this.http.post(`${environment.servidor}/api/UsuarioImagen`, json, {
+      headers: headers,
+    });
+  }
+
+  addPreferenciasDeTrabajo(preferencia) {
+    let json = JSON.stringify(preferencia);
+    let headers = new HttpHeaders().set("content-Type", "application/json");
+    return this.http.post(
+      `${environment.servidor}/api/PreferenciasDeTrabajo`,
+      json,
+      {
+        headers: headers,
+      }
+    );
+  }
+
+  addConocimiento(conocimiento) {
+    let json = JSON.stringify(conocimiento);
+    let headers = new HttpHeaders().set("content-Type", "application/json");
+    return this.http.post(`${environment.servidor}/api/Conocimiento`, json, {
+      headers: headers,
+    });
+  }
+
+  addUserIdioma(userIdioma) {
+    let json = JSON.stringify(userIdioma);
+    let headers = new HttpHeaders().set("content-Type", "application/json");
+    return this.http.post(`${environment.servidor}/api/UsuarioIdioma`, json, {
+      headers: headers,
+    });
   }
 
   addUser(user) {
@@ -239,6 +376,13 @@ export class ConexionDBService {
     return this.http.put(`${environment.servidor}/api/Usuario/${id}`, user);
   }
 
+  updatePreferenciasDeTrabajo(preferencia, id): Observable<any> {
+    return this.http.put(
+      `${environment.servidor}/api/PreferenciasDeTrabajo/${id}`,
+      preferencia
+    );
+  }
+
   updateExperiencia(experiencia, id): Observable<any> {
     return this.http.put(
       `${environment.servidor}/api/Experiencia/${id}`,
@@ -251,6 +395,22 @@ export class ConexionDBService {
       `${environment.servidor}/api/Formacion/${id}`,
       Formacion
     );
+  }
+
+  deleteExperiencia(id): Observable<any> {
+    return this.http.delete(`${environment.servidor}/api/Experiencia/${id}`);
+  }
+
+  deleteFormacion(id): Observable<any> {
+    return this.http.delete(`${environment.servidor}/api/Formacion/${id}`);
+  }
+
+  deleteIdioma(id): Observable<any> {
+    return this.http.delete(`${environment.servidor}/api/UsuarioIdioma/${id}`);
+  }
+
+  deleteConocimiento(id): Observable<any> {
+    return this.http.delete(`${environment.servidor}/api/Conocimiento/${id}`);
   }
 
   funcionError(mensaje) {

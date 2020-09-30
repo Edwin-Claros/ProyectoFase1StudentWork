@@ -24,6 +24,7 @@ namespace WebApiStudentWork.Models
         public string usuarioFacebook { get; set; }
         public string usuarioInstagram { get; set; }
         public string usuarioTwitter { get; set; }
+        //public string usuarioImagen { get; set; }
         public char usuarioEstadoCivil { get; set; }
         public char usuarioVehiculoPropio { get; set; }
         public char usuarioGenero { get; set; }
@@ -47,6 +48,9 @@ namespace WebApiStudentWork.Models
         public List<Experiencia> Experiencias { get; set; }
         public List<Formacion> Formaciones { get; set; }
         public List<UsuarioIdioma> UsuarioIdiomas { get; set; }
+        public List<Conocimiento> Conocimientos { get; set; }
+        public List<PreferenciasDeTrabajo> PreferenciasDeTrabajos { get; set; }
+        public List<UsuarioImagen> UserImagenes { get; set; }
     }
 
     public class UsuarioMap : IEntityTypeConfiguration<Usuario>
@@ -73,6 +77,7 @@ namespace WebApiStudentWork.Models
             builder.Property(e => e.usuarioFacebook).HasColumnType("nvarchar(150)");
             builder.Property(e => e.usuarioInstagram).HasColumnType("nvarchar(150)");
             builder.Property(e => e.usuarioTwitter).HasColumnType("nvarchar(150)");
+            //builder.Property(e => e.usuarioImagen).HasColumnType("nvarchar(150)");
 
             builder.HasOne(e => e.Pais).WithMany(e => e.Usuarios).HasForeignKey(e => e.pais_Id).OnDelete(DeleteBehavior.Cascade);
             builder.HasOne(e => e.PaisDepartamento).WithMany(e => e.Usuarios).HasForeignKey(e => e.paisDepartamento_Id).OnDelete(DeleteBehavior.Cascade);

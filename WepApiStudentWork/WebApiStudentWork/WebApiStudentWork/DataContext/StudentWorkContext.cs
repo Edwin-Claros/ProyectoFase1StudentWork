@@ -26,6 +26,10 @@ namespace WebApiStudentWork.DataContext
         public DbSet<NivelEstudio> NivelEstudios { get; set; }
         public DbSet<Idioma> Idiomas { get; set; }
         public DbSet<UsuarioIdioma> UsuarioIdiomas { get; set; }
+        public DbSet<Conocimiento> Conocimientos { get; set; }
+        public DbSet<PreferenciasDeTrabajo> PreferenciasDeTrabajos { get; set; }
+        public DbSet<SituacionActual> SituacionActuales { get; set; }
+        public DbSet<UsuarioImagen> UsuarioImagenes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -40,6 +44,10 @@ namespace WebApiStudentWork.DataContext
             modelBuilder.ApplyConfiguration(new NivelEstudioMap());
             modelBuilder.ApplyConfiguration(new IdiomaMap());
             modelBuilder.ApplyConfiguration(new UsuarioIdiomaMap());
+            modelBuilder.ApplyConfiguration(new ConocimientoMap());
+            modelBuilder.ApplyConfiguration(new PreferenciasDeTrabajoMap());
+            modelBuilder.ApplyConfiguration(new SituacionActualMap());
+            modelBuilder.ApplyConfiguration(new UsuarioImagenMap());
 
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
             {

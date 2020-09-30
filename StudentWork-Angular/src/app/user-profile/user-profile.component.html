@@ -346,12 +346,19 @@
         </div>
       </div>
     </div>
+    <img src="{{getImagenUser.userImagenImagem}}" width="400" height="300">
     <div class="col-md-4">
       <div class="card card-user">
         <div class="image">
           <img src="../assets/img/bg5.jpg" alt="..." />
+          <canvas id="prueba"></canvas>
         </div>
         <div class="card-body">
+
+
+
+
+
           <div class="author">
             <a href="#">
               <img
@@ -365,6 +372,16 @@
               {{ getDatoUser.usuarioDescripcion }}
             </p>
           </div>
+         <form #fomulario="ngForm">
+            <input type="file" (change)="fileEvent($event)">
+            <button (click)="addUserImagen($event)">Subir Archivo</button>
+          </form>
+
+
+
+
+
+
           <hr />
           <div class="button-container">
             <button
@@ -386,8 +403,8 @@
               class="btn btn-neutral btn-icon btn-round btn-lg"
               (click)="goInstagram()"
             >
-            <i class="fab fa-instagram"></i>
-          </button>
+              <i class="fab fa-instagram"></i>
+            </button>
           </div>
         </div>
       </div>
@@ -988,8 +1005,407 @@
         </div>
       </div>
     </div>
+    <!-- Idioma -->
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Idiomas</h5>
+        </div>
+        <div class="card-body">
+          <div class="form-row text-center">
+            <div class="col-12" (click)="showFormIdioma = !showFormIdioma">
+              <div *ngIf="!showFormIdioma; else close">
+                <p>Añadir</p>
+                <i class="now-ui-icons arrows-1_minimal-down"></i>
+              </div>
+              <ng-template #close>
+                <p>Cerrar</p>
+                <i class="now-ui-icons arrows-1_minimal-up"></i>
+              </ng-template>
+            </div>
+          </div>
+          <form
+            [formGroup]="FormularioUserIdioma"
+            (ngSubmit)="onSubmitUserIdioma(FormularioUserIdioma.value)"
+            *ngIf="showFormIdioma"
+          >
+            <div class="row">
+              <div class="col-md-5 pr-1">
+                <div class="form-group">
+                  <label>Idioma</label>
+                  <select
+                    placeholder="Selecciona"
+                    class="form-control"
+                    name="_idioma"
+                    formControlName="idioma_Id"
+                  >
+                    <option
+                      *ngFor="let indexIdioma of getIdiomaUser"
+                      value="{{ indexIdioma.idiomaId }}"
+                    >
+                      {{ indexIdioma.idiomaNombre }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <br />
+              <div class="col-md-5 pr-1">
+                <div class="form-group">
+                  <label>Nivel del Idioma</label>
+                  <select
+                    placeholder="Selecciona"
+                    class="form-control"
+                    name="_nivelidioma"
+                    formControlName="usuarioIdiomaNivel"
+                  >
+                    <option value="Muy Básico">Muy Básico</option>
+                    <option value="Básico">Básico</option>
+                    <option value="Intermedio">Intermedio</option>
+                    <option value="Avanzado">Avanzado</option>
+                    <option value="Nativo">Nativo</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <br />
+            <button
+              mat-raised-button
+              type="submit"
+              class="btn btn-danger pull-right"
+              [disabled]="FormularioUserIdioma.invalid"
+            >
+              Guardar
+            </button>
+          </form>
+          <br />
+          <div>
+            <br />
+          </div>
+          <br />
+          <div class="col-md-12" *ngFor="let indexDatoIdioma of getDatoIdioma">
+            <div class="card card-tasks">
+              <div class="card-body">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td class="text-left">
+                        <br />
+                        <div>
+                          <p>
+                            {{ indexDatoIdioma.usuarioIdiomaNivel }}
+                          </p>
+                          <p>
+                            {{ indexDatoIdioma.idioma.idiomaNombre }}
+                          </p>
+                        </div>
+                      </td>
+                      <td class="td-actions text-right">
+                        <button
+                          type="button"
+                          rel="tooltip"
+                          (click)="
+                            deleteIdioma(indexDatoIdioma.usuarioIdiomaId)
+                          "
+                          title=""
+                          class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral"
+                          data-original-title="Remove"
+                        >
+                          <i class="now-ui-icons ui-1_simple-remove"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Conocimiento -->
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Conocimiento y habilidades</h5>
+        </div>
+        <div class="card-body">
+          <div class="form-row text-center">
+            <div
+              class="col-12"
+              (click)="showFormConocimiento = !showFormConocimiento"
+            >
+              <div *ngIf="!showFormConocimiento; else close">
+                <p>Añadir</p>
+                <i class="now-ui-icons arrows-1_minimal-down"></i>
+              </div>
+              <ng-template #close>
+                <p>Cerrar</p>
+                <i class="now-ui-icons arrows-1_minimal-up"></i>
+              </ng-template>
+            </div>
+          </div>
+          <form
+            [formGroup]="FormularioConocimiento"
+            (ngSubmit)="onSubmitConocimiento(FormularioConocimiento.value)"
+            *ngIf="showFormConocimiento"
+          >
+            <div class="row">
+              <div class="col-md-9 pr-1">
+                <div class="form-group">
+                  <label>Tipo de conocimiento</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Tipo de conocimiento"
+                    name="_conocimientonombre"
+                    formControlName="conocimientoNombre"
+                  />
+                </div>
+              </div>
+            </div>
+            <br />
+            <button
+              mat-raised-button
+              type="submit"
+              class="btn btn-danger pull-right"
+              [disabled]="FormularioConocimiento.invalid"
+            >
+              Guardar
+            </button>
+          </form>
+          <br />
+          <div>
+            <br />
+          </div>
+          <br />
+          <div
+            class="col-md-12"
+            *ngFor="let indexDatoConocimiento of getDatoConocimiento"
+          >
+            <div class="card card-tasks">
+              <div class="card-body">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td class="text-left">
+                        <br />
+                        <div>
+                          <p>
+                            {{ indexDatoConocimiento.conocimientoNombre }}
+                          </p>
+                        </div>
+                      </td>
+                      <td class="td-actions text-right">
+                        <button
+                          type="button"
+                          rel="tooltip"
+                          (click)="
+                            deleteConocimiento(
+                              indexDatoConocimiento.conocimientoId
+                            )
+                          "
+                          title=""
+                          class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral"
+                          data-original-title="Remove"
+                        >
+                          <i class="now-ui-icons ui-1_simple-remove"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Preferencias de trabajo -->
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Preferencias de trabajo</h5>
+        </div>
+        <div class="card-body">
+          <div class="form-row text-center"></div>
+          <form
+            [formGroup]="FormularioPreferenciasDeTrabajo"
+            (ngSubmit)="
+              onSubmitPreferenciasDeTrabajo(
+                FormularioPreferenciasDeTrabajo.value
+              )
+            "
+          >
+            <div class="row">
+              <div class="col-md-9 pr-1">
+                <div class="form-group">
+                  <label>Situación Actual</label>
+                  <select
+                    placeholder="Selecciona"
+                    class="form-control"
+                    name="_situacionactual"
+                    [(ngModel)]="
+                      getDatoPreferenciasDeTrabajo.situacionActual_Id
+                    "
+                    formControlName="situacionActual_Id"
+                  >
+                    <option
+                      *ngFor="
+                        let indexSituacionActual of getSituacionActualUser
+                      "
+                      value="{{ indexSituacionActual.situacionActualId }}"
+                    >
+                      {{ indexSituacionActual.situacionActualNombre }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-7 pr-1">
+                <div class="form-group">
+                  <label>Puesto de trabajo deseado</label>
+                  <input
+                    type="text"
+                    formControlName="preferenciasDeTrabajoPuesto"
+                    class="form-control _centroeducativo"
+                    placeholder="Puesto de trabajo deseado"
+                    name="_preferenciasDeTrabajoPuesto"
+                    [(ngModel)]="
+                      getDatoPreferenciasDeTrabajo.preferenciasDeTrabajoPuesto
+                    "
+                  />
+                </div>
+              </div>
+              <div class="col-md-7 pr-1">
+                <div class="form-group">
+                  <label>Área</label>
+                  <input
+                    type="text"
+                    formControlName="preferenciasDeTrabajoArea"
+                    class="form-control _centroeducativo"
+                    placeholder="Área"
+                    name="_preferenciasDeTrabajoArea"
+                    [(ngModel)]="
+                      getDatoPreferenciasDeTrabajo.preferenciasDeTrabajoArea
+                    "
+                  />
+                </div>
+              </div>
+              <div class="col-md-7 pr-1">
+                <div class="form-group">
+                  <label>Salario mínimo aceptado</label>
+                  <input
+                    type="text"
+                    formControlName="preferenciasDeTrabajoSalario"
+                    class="form-control"
+                    placeholder="Salario mínimo aceptado"
+                    name="_preferenciasDeTrabajoSalario"
+                    [(ngModel)]="
+                      getDatoPreferenciasDeTrabajo.preferenciasDeTrabajoSalario
+                    "
+                  />
+                </div>
+              </div>
+              <div class="col-md-9 pr-1">
+                <div class="form-group">
+                  <label>Departamento</label>
+                  <select
+                    placeholder="Selecciona"
+                    class="form-control"
+                    name="_paisDepartamento_Id"
+                    formControlName="paisDepartamento_Id"
+                    [(ngModel)]="
+                      getDatoPreferenciasDeTrabajo.paisDepartamento_Id
+                    "
+                  >
+                    <option
+                      *ngFor="let indexState of getStateUser"
+                      value="{{ indexState.paisDepartamentoId }}"
+                    >
+                      {{ indexState.paisDepartamentoNombre }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Disponibilidad para viajar</label>
+                  <p>
+                    <input
+                      type="radio"
+                      class="radio-inline"
+                      name="preferenciasDeTrabajoViajar"
+                      value="S"
+                      formControlName="preferenciasDeTrabajoViajar"
+                      [(ngModel)]="
+                        getDatoPreferenciasDeTrabajo.preferenciasDeTrabajoViajar
+                      "
+                    />&nbsp;<label> Sí </label> &nbsp;
+                    <input
+                      type="radio"
+                      class="radio-inline"
+                      name="preferenciasDeTrabajoViajar"
+                      value="N"
+                      formControlName="preferenciasDeTrabajoViajar"
+                      [(ngModel)]="
+                        getDatoPreferenciasDeTrabajo.preferenciasDeTrabajoViajar
+                      "
+                    />&nbsp;<label> No </label>
+                  </p>
+                </div>
+              </div>
+              <br />
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Disponibilidad para cambiar de residencia</label>
+                  <p>
+                    <input
+                      type="radio"
+                      class="radio-inline"
+                      name="preferenciasDeTrabajoResidencia"
+                      value="S"
+                      formControlName="preferenciasDeTrabajoResidencia"
+                      [(ngModel)]="
+                        getDatoPreferenciasDeTrabajo.preferenciasDeTrabajoResidencia
+                      "
+                    />&nbsp;<label> Sí </label> &nbsp;
+                    <input
+                      type="radio"
+                      class="radio-inline"
+                      name="preferenciasDeTrabajoResidencia"
+                      value="N"
+                      formControlName="preferenciasDeTrabajoResidencia"
+                      [(ngModel)]="
+                        getDatoPreferenciasDeTrabajo.preferenciasDeTrabajoResidencia
+                      "
+                    />&nbsp;<label> No </label>
+                  </p>
+                </div>
+              </div>
+              <br />
+            </div>
+            <br />
+            <button
+              mat-raised-button
+              type="submit"
+              class="btn btn-danger pull-right"
+              [disabled]="FormularioPreferenciasDeTrabajo.invalid"
+            >
+              Guardar
+            </button>
+          </form>
+          <br />
+          <div>
+            <br />
+          </div>
+          <br />
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
 <!-- Modal Experiencia -->
 <div
   class="modal fade"

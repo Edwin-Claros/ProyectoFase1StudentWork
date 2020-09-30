@@ -10,8 +10,8 @@ using WebApiStudentWork.DataContext;
 namespace WebApiStudentWork.Migrations
 {
     [DbContext(typeof(StudentWorkContext))]
-    [Migration("20200925050431_ModelosIdioma")]
-    partial class ModelosIdioma
+    [Migration("20200930070113_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,6 +19,27 @@ namespace WebApiStudentWork.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("WebApiStudentWork.Models.Conocimiento", b =>
+                {
+                    b.Property<int>("conocimientoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("conocimientoNombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<int>("usuario_Id")
+                        .HasColumnType("int");
+
+                    b.HasKey("conocimientoId");
+
+                    b.HasIndex("usuario_Id");
+
+                    b.ToTable("conocimiento");
+                });
 
             modelBuilder.Entity("WebApiStudentWork.Models.EmpresaSector", b =>
                 {
@@ -97,7 +118,7 @@ namespace WebApiStudentWork.Migrations
                         .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("formacionAccesoAEmpleo")
-                        .HasColumnType("char(1)");
+                        .HasColumnType("nvarchar(5)");
 
                     b.Property<string>("formacionAreaDeEstudio")
                         .IsRequired()
@@ -109,7 +130,7 @@ namespace WebApiStudentWork.Migrations
 
                     b.Property<string>("formacionEstado")
                         .IsRequired()
-                        .HasColumnType("char(1)");
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<DateTime>("formacionFechaFinal")
                         .HasColumnType("date");
@@ -118,14 +139,14 @@ namespace WebApiStudentWork.Migrations
                         .HasColumnType("date");
 
                     b.Property<string>("formacionNivelProfesorado")
-                        .HasColumnType("char(1)");
+                        .HasColumnType("nvarchar(5)");
 
                     b.Property<string>("formacionRecomendacion")
                         .IsRequired()
-                        .HasColumnType("char(1)");
+                        .HasColumnType("nvarchar(5)");
 
                     b.Property<string>("formacionSatisfaccionprendizaje")
-                        .HasColumnType("char(1)");
+                        .HasColumnType("nvarchar(5)");
 
                     b.Property<int>("nivelEstudio_Id")
                         .HasColumnType("int");
@@ -246,6 +267,65 @@ namespace WebApiStudentWork.Migrations
                     b.ToTable("paisDepartamento");
                 });
 
+            modelBuilder.Entity("WebApiStudentWork.Models.PreferenciasDeTrabajo", b =>
+                {
+                    b.Property<int>("preferenciasDeTrabajoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("paisDepartamento_Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("preferenciasDeTrabajoArea")
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("preferenciasDeTrabajoPuesto")
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("preferenciasDeTrabajoResidencia")
+                        .IsRequired()
+                        .HasColumnType("char(1)");
+
+                    b.Property<string>("preferenciasDeTrabajoSalario")
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("preferenciasDeTrabajoViajar")
+                        .IsRequired()
+                        .HasColumnType("char(1)");
+
+                    b.Property<int>("situacionActual_Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("usuario_Id")
+                        .HasColumnType("int");
+
+                    b.HasKey("preferenciasDeTrabajoId");
+
+                    b.HasIndex("paisDepartamento_Id");
+
+                    b.HasIndex("situacionActual_Id");
+
+                    b.HasIndex("usuario_Id");
+
+                    b.ToTable("preferenciasDeTrabajo");
+                });
+
+            modelBuilder.Entity("WebApiStudentWork.Models.SituacionActual", b =>
+                {
+                    b.Property<int>("situacionActualId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("situacionActualNombre")
+                        .HasColumnType("nvarchar(150)");
+
+                    b.HasKey("situacionActualId");
+
+                    b.ToTable("situacionActual");
+                });
+
             modelBuilder.Entity("WebApiStudentWork.Models.Usuario", b =>
                 {
                     b.Property<int>("usuarioId")
@@ -363,6 +443,38 @@ namespace WebApiStudentWork.Migrations
                     b.ToTable("usuarioIdioma");
                 });
 
+            modelBuilder.Entity("WebApiStudentWork.Models.UsuarioImagen", b =>
+                {
+                    b.Property<int>("usuarioImagenId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("usuarioImagenImagen")
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("usuarioImagenType")
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<int>("usuario_Id")
+                        .HasColumnType("int");
+
+                    b.HasKey("usuarioImagenId");
+
+                    b.HasIndex("usuario_Id");
+
+                    b.ToTable("usuarioImagen");
+                });
+
+            modelBuilder.Entity("WebApiStudentWork.Models.Conocimiento", b =>
+                {
+                    b.HasOne("WebApiStudentWork.Models.Usuario", "Usuario")
+                        .WithMany("Conocimientos")
+                        .HasForeignKey("usuario_Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("WebApiStudentWork.Models.Experiencia", b =>
                 {
                     b.HasOne("WebApiStudentWork.Models.EmpresaSector", "EmpresaSector")
@@ -411,6 +523,27 @@ namespace WebApiStudentWork.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("WebApiStudentWork.Models.PreferenciasDeTrabajo", b =>
+                {
+                    b.HasOne("WebApiStudentWork.Models.PaisDepartamento", "PaisDepartamento")
+                        .WithMany("PreferenciasDeTrabajos")
+                        .HasForeignKey("paisDepartamento_Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("WebApiStudentWork.Models.SituacionActual", "SituacionActual")
+                        .WithMany("PreferenciasDeTrabajos")
+                        .HasForeignKey("situacionActual_Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("WebApiStudentWork.Models.Usuario", "Usuario")
+                        .WithMany("PreferenciasDeTrabajos")
+                        .HasForeignKey("usuario_Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("WebApiStudentWork.Models.Usuario", b =>
                 {
                     b.HasOne("WebApiStudentWork.Models.LicenciaConducir", "LicenciaConducir")
@@ -446,6 +579,15 @@ namespace WebApiStudentWork.Migrations
 
                     b.HasOne("WebApiStudentWork.Models.Usuario", "Usuario")
                         .WithMany("UsuarioIdiomas")
+                        .HasForeignKey("usuario_Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApiStudentWork.Models.UsuarioImagen", b =>
+                {
+                    b.HasOne("WebApiStudentWork.Models.Usuario", "Usuario")
+                        .WithMany("UserImagenes")
                         .HasForeignKey("usuario_Id")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
