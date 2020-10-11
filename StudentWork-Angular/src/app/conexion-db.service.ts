@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { auth } from "firebase/app";
 import { AngularFireAuth } from "@angular/fire/auth";
-import { User } from "firebase";
 import { Observable } from "rxjs";
 import { ToastrService } from "ngx-toastr";
 import { environment } from "../environments/environment";
@@ -12,7 +11,6 @@ import { environment } from "../environments/environment";
   providedIn: "root",
 })
 export class ConexionDBService {
-  userLoginFirebase: User;
   getDatoUserApi: any;
   obtenerDatosUser: any;
 

@@ -346,7 +346,6 @@
         </div>
       </div>
     </div>
-    <img src="{{getImagenUser.userImagenImagem}}" width="400" height="300">
     <div class="col-md-4">
       <div class="card card-user">
         <div class="image">
@@ -372,10 +371,6 @@
               {{ getDatoUser.usuarioDescripcion }}
             </p>
           </div>
-         <form #fomulario="ngForm">
-            <input type="file" (change)="fileEvent($event)">
-            <button (click)="addUserImagen($event)">Subir Archivo</button>
-          </form>
 
 
 

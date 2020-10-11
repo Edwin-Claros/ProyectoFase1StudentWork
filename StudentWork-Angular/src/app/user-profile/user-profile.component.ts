@@ -49,6 +49,7 @@ export class UserProfileComponent implements OnInit {
   getSituacionActualUser: any = [];
   getImagenUser: any = [];
   archivoImagen: UsuarioImagenModel;
+  selectedFile: File = null;
 
   constructor(
     private _service: ConexionDBService,
@@ -64,7 +65,6 @@ export class UserProfileComponent implements OnInit {
     this.getCities();
     this.getState();
     this.getIdioma();
-    this.getUserImagen();
     this.getLicences();
     this.getEmpresaSector();
     this.getNivelEstudio();
@@ -178,71 +178,6 @@ export class UserProfileComponent implements OnInit {
       console.log("ya");
     }, 2000);
   }
-
-
-
-
-  getUserImagen() {
-    this._service.getDatoUserImagen().subscribe(
-      (result) => {
-        this.getImagenUser = result;
-      },
-      (error) => {
-        this._service.funcionError("No se pudieron obtener la imagen del usuario");
-        console.log(JSON.stringify(error));
-      }
-    );
-  }
-
-  addUserImagen(agregar) {
-    this._service.addUserImagen(this.archivoImagen).subscribe(
-      (result) => {
-        this._service.funcionExitosa(
-          "Felicidades, los datos fueron guardados con exito!"
-        );
-        //this.refresh();
-      },
-      (error) => {
-        this._service.funcionError(
-          "ERROR, Los datos no pudieron ser almacenados"
-        );
-        console.log(JSON.stringify(error));
-      }
-    );
-  }
-
-  fileEvent(fileInput: Event){
-    let file = (<HTMLInputElement>fileInput.target).files[0];
-
-    if (file.type == "image/jpeg" || file.type == "image/png") {
-      this.archivoImagen = new UsuarioImagenModel();
-      this.archivoImagen.usuarioImagenImagen = file.name;
-      this.archivoImagen.usuario_Id = this.getDatoUser.usuarioId;
-      this.archivoImagen.usuarioImagenType = file.type;
-    }
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   addPreferenciasDeTrabajo(agregar) {
     this._service.addPreferenciasDeTrabajo(agregar).subscribe(

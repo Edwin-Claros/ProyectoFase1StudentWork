@@ -465,5 +465,5 @@ C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiS
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\obj\Debug\netcoreapp3.1\WebApiStudentWork.dll
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\obj\Debug\netcoreapp3.1\WebApiStudentWork.pdb
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\obj\Debug\netcoreapp3.1\WebApiStudentWork.genruntimeconfig.cache
-C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\studentwork - Web Deploy\profile.arm.json
 C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\obj\Debug\netcoreapp3.1\WebApiStudentWork.csprojAssemblyReference.cache
+C:\Users\edwin\OneDrive\Escritorio\Fase 1\Proyecto\GitProyecto\Git\Fase1\WepApiStudentWork\WebApiStudentWork\WebApiStudentWork\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\StudentWorkFase2 - Web Deploy\profile.arm.json
