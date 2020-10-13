@@ -16,6 +16,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../../../../src/environments/environment';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { environment } from '../../../../src/environments/environment';
     NgbModule,
     ToastrModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    ImageCropperModule,
   ],
   declarations: [
     DashboardComponent,

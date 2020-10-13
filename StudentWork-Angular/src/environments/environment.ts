@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  servidor: "https://studentwork.azurewebsites.net",
+  servidor: "https://localhost:5001",
 };
 
 export const config = {

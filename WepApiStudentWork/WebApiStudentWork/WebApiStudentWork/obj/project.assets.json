@@ -9080,30 +9080,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\edwin\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "/home/edwinclaros/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\edwin\\OneDrive\\Escritorio\\Fase 1\\Proyecto\\GitProyecto\\Git\\Fase1\\WepApiStudentWork\\WebApiStudentWork\\WebApiStudentWork\\WebApiStudentWork.csproj",
+      "projectUniqueName": "/home/edwinclaros/Desktop/Code/ProyectoFase1StudentWork/WepApiStudentWork/WebApiStudentWork/WebApiStudentWork/WebApiStudentWork.csproj",
       "projectName": "WebApiStudentWork",
-      "projectPath": "C:\\Users\\edwin\\OneDrive\\Escritorio\\Fase 1\\Proyecto\\GitProyecto\\Git\\Fase1\\WepApiStudentWork\\WebApiStudentWork\\WebApiStudentWork\\WebApiStudentWork.csproj",
-      "packagesPath": "C:\\Users\\edwin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\edwin\\OneDrive\\Escritorio\\Fase 1\\Proyecto\\GitProyecto\\Git\\Fase1\\WepApiStudentWork\\WebApiStudentWork\\WebApiStudentWork\\obj\\",
+      "projectPath": "/home/edwinclaros/Desktop/Code/ProyectoFase1StudentWork/WepApiStudentWork/WebApiStudentWork/WebApiStudentWork/WebApiStudentWork.csproj",
+      "packagesPath": "/home/edwinclaros/.nuget/packages/",
+      "outputPath": "/home/edwinclaros/Desktop/Code/ProyectoFase1StudentWork/WepApiStudentWork/WebApiStudentWork/WebApiStudentWork/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\edwin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/home/edwinclaros/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -9183,7 +9177,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.402/RuntimeIdentifierGraph.json"
       }
     }
   }

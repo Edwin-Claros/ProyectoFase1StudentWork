@@ -16,6 +16,7 @@ import { environment } from "../environments/environment";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { config } from "../environments/environment";
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
   imports: [
@@ -33,6 +34,7 @@ import { config } from "../environments/environment";
     }),
     AngularFireModule.initializeApp(config),
     AngularFireAuthModule,
+    ImageCropperModule,
   ],
   declarations: [AppComponent, AdminLayoutComponent, LoginComponent],
   providers: [ConexionDBService],

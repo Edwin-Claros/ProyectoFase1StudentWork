@@ -8,6 +8,7 @@ import { UserIdiomaModel } from "../models/UserIdiomaModel";
 import { ConocimientoModel } from "../models/ConocimientoModel";
 import { PreferenciasDeTrabajoModel } from "../models/PreferenciasDeTrabajoModel";
 import { UsuarioImagenModel } from "../models/UsuarioImagenModel";
+import { ImageCroppedEvent } from 'ngx-image-cropper';
 
 @Component({
   selector: "app-user-profile",
@@ -47,9 +48,6 @@ export class UserProfileComponent implements OnInit {
   getDatoConocimiento: any = [];
   getDatoPreferenciasDeTrabajo: any = [];
   getSituacionActualUser: any = [];
-  getImagenUser: any = [];
-  archivoImagen: UsuarioImagenModel;
-  selectedFile: File = null;
 
   constructor(
     private _service: ConexionDBService,
@@ -79,9 +77,32 @@ export class UserProfileComponent implements OnInit {
     this.formularioPreferenciasDeTrabajo();
   }
 
-  prueba(){
-    var banner = document.getElementById('prueba');
-  }
+  imageChangedEvent: any = '';
+    croppedImage: any = '';
+
+    fileChangeEvent(event: any): void {
+        this.imageChangedEvent = event;
+        console.log(this.imageChangedEvent);
+    }
+    imageCropped(event: ImageCroppedEvent) {
+        this.croppedImage = event.base64;
+        console.log(this.croppedImage);
+    }
+    imageLoaded() {
+        // show cropper
+    }
+    cropperReady() {
+        // cropper ready
+    }
+    loadImageFailed() {
+        // show message
+    }
+
+
+
+
+
+
 
   onSubmitUser(ModeloClase: any) {
     const agregar = new UsuarioModel();
