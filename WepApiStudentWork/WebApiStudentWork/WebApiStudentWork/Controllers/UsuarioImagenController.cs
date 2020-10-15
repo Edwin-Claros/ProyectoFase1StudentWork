@@ -96,7 +96,7 @@ namespace WebApiStudentWork.Controllers
             _context.UsuarioImagenes.Add(usuarioImagen);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUsuarioImagen", new { id = usuarioImagen.usuarioImagenId }, usuarioImagen);
+            return CreatedAtAction("GetUsuarioImagenById", new { id = usuarioImagen.usuarioImagenId }, usuarioImagen);
         }
 
         // DELETE: api/UsuarioImagen/5

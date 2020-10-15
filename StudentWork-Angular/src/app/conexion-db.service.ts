@@ -26,6 +26,7 @@ export class ConexionDBService {
       this.addDatoUserIdiomaStorage();
       this.addDatoConocimientoStorage();
       this.addDatoPreferenciasDeTrabajoStorage();
+      this.addDatoUserImagenStorage();
       if (user) {
         sessionStorage.setItem("user", JSON.stringify(user));
         console.log("creo ser primero");
@@ -310,6 +311,23 @@ export class ConexionDBService {
     }
   }
 
+  addDatoUserImagenStorage() {
+    if (this.getDatoUserImagen() == null) {
+      sessionStorage.setItem("imagenUserApi", null);
+      console.log("Hola Estoy Aqui");
+    } else {
+      this.getDatoUserImagen().subscribe(
+        (result) => {
+          sessionStorage.setItem("imagenUserApi", JSON.stringify(result));
+        },
+        (error) => {
+          sessionStorage.setItem("imagenUserApi", null);
+          console.log(JSON.stringify(error));
+        }
+      );
+    }
+  }
+
   addUserImagen(imagen) {
     let json = JSON.stringify(imagen);
     let headers = new HttpHeaders().set("content-Type", "application/json");
@@ -392,6 +410,13 @@ export class ConexionDBService {
     return this.http.put(
       `${environment.servidor}/api/Formacion/${id}`,
       Formacion
+    );
+  }
+
+  updateUserImagen(Imagen, id): Observable<any> {
+    return this.http.put(
+      `${environment.servidor}/api/UsuarioImagen/${id}`,
+      Imagen
     );
   }
 

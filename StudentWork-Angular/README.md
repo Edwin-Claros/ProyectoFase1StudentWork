@@ -13,7 +13,7 @@
 Within the download you'll find the following directories and files:
 
 ```
-StudentWork
+studentwork
 ├── CHANGELOG.md
 ├── LICENSE.md
 ├── README.md

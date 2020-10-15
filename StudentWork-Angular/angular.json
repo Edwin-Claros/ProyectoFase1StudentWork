@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "StudentWork": {
+    "studentwork": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -31,8 +31,22 @@
               "node_modules/chart.js/dist/Chart.min.js",
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/@popperjs/core/dist/umd/popper.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
-            ]
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/web-animations-js/web-animations.min.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "lodash",
+              "firebase",
+              "@angular/common/locales/fr",
+              "lodash/dropRight",
+              "@firebase/app",
+              "firebase/app",
+              "@firebase/database",
+              "@firebase/firestore",
+              "@firebase/functions",
+              "@firebase/performance",
+              "@firebase/remote-config"
+          ],
           },
           "configurations": {
             "production": {
@@ -59,18 +73,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "StudentWork:build"
+            "browserTarget": "studentwork:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "StudentWork:build:production"
+              "browserTarget": "studentwork:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "StudentWork:build"
+            "browserTarget": "studentwork:build"
           }
         },
         "test": {
@@ -93,7 +107,22 @@
               "src/assets",
               "src/favicon.ico",
               "src/manifest.webmanifest"
-            ]
+            ],
+            "allowedCommonJsDependencies": [
+              "lodash",
+              "firebase",
+              "@angular/common/locales/fr",
+              "lodash/dropRight",
+              "@firebase/app",
+              "firebase/app",
+              "@firebase/database",
+              "@firebase/firestore",
+              "@firebase/functions",
+              "@firebase/performance",
+              "@firebase/remote-config",
+              "@firebase/auth",
+              "chart.js"
+          ]
           }
         },
         "lint": {
@@ -108,7 +137,7 @@
         }
       }
     },
-    "StudentWork-e2e": {
+    "studentwork-e2e": {
       "root": "e2e",
       "sourceRoot": "e2e",
       "projectType": "application",
@@ -117,7 +146,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "StudentWork:serve"
+            "devServerTarget": "studentwork:serve"
           }
         },
         "lint": {
@@ -132,7 +161,7 @@
       }
     }
   },
-  "defaultProject": "StudentWork",
+  "defaultProject": "studentwork",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",

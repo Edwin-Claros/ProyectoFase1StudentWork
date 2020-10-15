@@ -32,6 +32,7 @@ export class UserProfileComponent implements OnInit {
   FormularioUserIdioma: FormGroup;
   FormularioConocimiento: FormGroup;
   FormularioPreferenciasDeTrabajo: FormGroup;
+  FormularioUserImagen: FormGroup;
 
   showFormExperiencia: boolean = false;
   showFormFormacion: boolean = false;
@@ -48,6 +49,7 @@ export class UserProfileComponent implements OnInit {
   getDatoConocimiento: any = [];
   getDatoPreferenciasDeTrabajo: any = [];
   getSituacionActualUser: any = [];
+  getUserImagenDato: any = [];
 
   constructor(
     private _service: ConexionDBService,
@@ -75,6 +77,7 @@ export class UserProfileComponent implements OnInit {
     this.formularioUserIdioma();
     this.formularioConocimiento();
     this.formularioPreferenciasDeTrabajo();
+    this.formularioUserImagen();
   }
 
   imageChangedEvent: any = '';
@@ -83,20 +86,96 @@ export class UserProfileComponent implements OnInit {
     fileChangeEvent(event: any): void {
         this.imageChangedEvent = event;
         console.log(this.imageChangedEvent);
+        $('#exampleModalCenter').modal('show');
     }
     imageCropped(event: ImageCroppedEvent) {
         this.croppedImage = event.base64;
-        console.log(this.croppedImage);
+       // console.log(this.croppedImage);
     }
-    imageLoaded() {
-        // show cropper
+    // imageLoaded() {
+    //     // show cropper
+    // }
+    // cropperReady() {
+    //     // cropper ready
+    // }
+    // loadImageFailed() {
+    //     // show message
+    // }
+
+    onSubmitUserImagen(ModeloClase: any) {
+      const agregar = new UsuarioImagenModel();
+      this.modelUserImagen(agregar, ModeloClase);//Falta modificar en la validacion el id de la imagen
+      if (this.getUserImagenDato.usuarioImagenId == null || undefined) {
+        agregar.usuario_Id = this.getDatoUser.usuarioId;
+        agregar.usuarioImagenImagen = this.croppedImage;
+        console.log(agregar);
+        this.addUserImagen(agregar);
+      } else {
+        agregar.usuario_Id = this.getDatoUser.usuarioId;
+        agregar.usuarioImagenId = this.getUserImagenDato.usuarioImagenId;
+        agregar.usuarioImagenImagen = this.croppedImage;
+        console.log(agregar);
+        this.updateUser(agregar, this.getDatoUser.usuarioId);
+      }
     }
-    cropperReady() {
-        // cropper ready
+
+    getUserImagen() {
+      var getUserImagen = JSON.parse(sessionStorage.getItem("imagenUserApi"));
+      if (getUserImagen == null) {
+        this.getUserImagenDato.usuarioImagenImagen = [];
+      } else {
+        this.getUserImagenDato = getUserImagen;
+      }
     }
-    loadImageFailed() {
-        // show message
+
+    addUserImagen(agregar) {
+      this._service.addUserImagen(agregar).subscribe(
+        (result) => {
+          this._service.funcionExitosa(
+            "Felicidades, los datos fueron guardados con exito!"
+          );
+          this.refresh();
+        },
+        (error) => {
+          console.log(error);
+          this._service.funcionError(
+            "ERROR, Los datos no pudieron ser almacenados"
+          );
+        }
+      );
     }
+
+    updateUserImagen(agregar, id) {
+    this._service.updateUserImagen(agregar, id).subscribe(
+      (result) => {
+        this._service.funcionExitosa(
+          "Felicidades, los datos fueron actualizados con exito!"
+        );
+        setTimeout(() => {
+          this.refresh();
+        }, 400);
+      },
+      (error) => {
+        console.log(error);
+        this._service.funcionError(
+          "ERROR, Los datos no pudieron ser actualizados"
+        );
+      }
+    );
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -196,6 +275,7 @@ export class UserProfileComponent implements OnInit {
       this.getDatoIdiomaUser();
       this.getConocimiento();
       this.getPreferenciasDeTrabajo();
+      this.getUserImagen();
       console.log("ya");
     }, 2000);
   }
@@ -494,6 +574,7 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
+
   getExperienciaUser() {
     var getExperiencia = JSON.parse(sessionStorage.getItem("expApi"));
     if (getExperiencia == null) {
@@ -647,6 +728,12 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
+  formularioUserImagen() {
+    this.FormularioUserImagen = this.formularioB.group({
+
+    });
+  }
+
   formularioExperienciaModal() {
     this.FormularioExperienciaModal = this.formularioB.group({
       experienciaEmpresaModal: ["", Validators.required],
@@ -739,7 +826,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   modelUserImagen(agregar, ModeloClase) {
-    agregar.userImagenImagem = ModeloClase.userImagenImagem;
+    agregar.usuarioImagenImagen = ModeloClase.usuarioImagenImagen;
   }
 
   modelUser(agregar, ModeloClase) {

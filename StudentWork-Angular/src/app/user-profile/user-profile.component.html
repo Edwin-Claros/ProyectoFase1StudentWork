@@ -1,16 +1,139 @@
 <div class="panel-header panel-header-sm"></div>
 <div class="main-content">
   <div class="row">
+
+
+
+
+          <div class="col-md-8">
+            <div class="card card-user">
+              <div class="image">
+                <img src="../assets/img/bg5.jpg" alt="..." />
+                <canvas id="prueba"></canvas>
+              </div>
+
+
+
+
+              <div class="card-body">
+                <div class="author">
+                  <label for="Prueba">
+                    <img
+                      class="avatar "
+                      src="../assets/img/mike.jpg"
+                      alt="..."
+                    />
+                    <img class="avatar" [src]="croppedImage" alt="..."/>
+                  </label>
+                  <input type="file" class="sr-only" (change)="fileChangeEvent($event)" id="Prueba"/>
+                    <h5 class="title">{{ getDatoUser.usuarioNombre }}</h5>
+                  <p class="description text-center">
+                    {{ getDatoUser.usuarioDescripcion }}
+                  </p>
+                </div>
+
+
+<!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form
+                          [formGroup]="FormularioUserImagen"
+                          (ngSubmit)="onSubmitUserImagen(FormularioUserImagen.value)"
+                        >
+
+                        <div class="text-center">
+                          <h5>Crop Image</h5>
+                          <image-cropper
+                          [imageChangedEvent]="imageChangedEvent"
+                          [maintainAspectRatio]="true"
+                          [aspectRatio]="4 / 4"
+                          [resizeToWidth]="256"
+                          format="png,jpeg"
+                          (imageCropped)="imageCropped($event)"
+                          >
+                          <!-- (imageLoaded)="imageLoaded()"
+                          (cropperReady)="cropperReady()"
+                          (loadImageFailed)="loadImageFailed()" -->
+                        </image-cropper>
+                      </div>
+                      <div class="text-center">
+                          <h5>Preview</h5>
+                          <img [src]="croppedImage" />
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar Imagen</button>
+                      </div>
+                    </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <hr />
+                <div class="button-container">
+                  <button
+                    href="getDatoUser.usuarioFacebook"
+                    class="btn btn-neutral btn-icon btn-round btn-lg"
+                    (click)="goFacebook()"
+                  >
+                    <i class="fab fa-facebook-f"></i>
+                  </button>
+                  <button
+                    href="getDatoUser.usuarioTwitter"
+                    class="btn btn-neutral btn-icon btn-round btn-lg"
+                    (click)="goTwitter()"
+                  >
+                    <i class="fab fa-twitter"></i>
+                  </button>
+                  <button
+                    href=""
+                    class="btn btn-neutral btn-icon btn-round btn-lg"
+                    (click)="goInstagram()"
+                  >
+                    <i class="fab fa-instagram"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
     <div class="col-md-8">
       <div class="card">
         <div class="card-header">
           <h5 class="title">Datos Personales</h5>
         </div>
         <div class="card-body">
+
           <form
-            [formGroup]="FormularioUser"
-            (ngSubmit)="onSubmitUser(FormularioUser.value)"
-          >
+          [formGroup]="FormularioUser"
+          (ngSubmit)="onSubmitUser(FormularioUser.value)"
+        >
             <div class="row">
               <div class="col-md-5 pr-1">
                 <div class="form-group">
@@ -342,11 +465,12 @@
             >
               Guardar
             </button>
+
           </form>
         </div>
       </div>
     </div>
-    <div class="col-md-4">
+    <!-- <div class="col-md-4">
       <div class="card card-user">
         <div class="image">
           <img src="../assets/img/bg5.jpg" alt="..." />
@@ -425,7 +549,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- Experiencia Laboral -->
     <div class="col-md-8">
       <div class="card">

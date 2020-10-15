@@ -1,0 +1,5 @@
+{
+    "appService.preDeployTask": "publish-release",
+    "appService.deploySubpath": "bin/Release/netcoreapp3.1/publish",
+    "appService.defaultWebAppToDeploy": "/subscriptions/43df4678-7575-4044-93ff-e02ca37f4e4a/resourceGroups/studentwork-db/providers/Microsoft.Web/sites/StudentWorkFase2"
+}

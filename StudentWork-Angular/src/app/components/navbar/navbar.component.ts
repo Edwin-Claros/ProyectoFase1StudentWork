@@ -6,7 +6,6 @@ import {
   PathLocationStrategy,
 } from "@angular/common";
 import { Router, RouterLink } from "@angular/router";
-import Chart from "chart.js";
 import { ConexionDBService } from "../../conexion-db.service";
 
 @Component({
