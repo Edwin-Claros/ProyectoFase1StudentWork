@@ -28,7 +28,7 @@ namespace WebApiStudentWork.Controllers
             return await _context.UsuarioImagenes.ToListAsync();
         }
 
-        //// GET: api/UsuarioImagen/5
+        // GET: api/UsuarioImagen/5
         //[HttpGet("{id}")]
         //public async Task<ActionResult<UsuarioImagen>> GetUsuarioImagen(int id)
         //{
